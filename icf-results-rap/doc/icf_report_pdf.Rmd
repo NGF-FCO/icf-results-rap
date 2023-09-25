@@ -1,0 +1,1073 @@
+---
+title: "UK International Climate Finance Results"
+author: "FCDO, DESNZ, DSIT and Defra ICF teams"
+date: "`r format(Sys.Date(),'%d %b %Y')`"
+output:
+  pdf_document:
+    latex_engine: xelatex
+    extra_dependencies: ["float"]
+    toc: true
+    toc_depth: 2
+    number_sections: false
+header-includes:
+  - \usepackage{fontspec}
+  - \setmainfont[SlantedFont=*,SlantedFeatures={FakeSlant=0.2}]{GDSTransportWebsite}
+  - \usepackage{booktabs}
+  - \usepackage{array}
+  - \usepackage{endnotes}
+  - \usepackage{epigraph}
+  - \usepackage{acronym}
+  
+---
+
+\let\footnote=\endnote
+
+\section{List of Acronyms}
+\begin{acronym}
+\acro{FCDO}{Foreign, Commonwealth and Development Office}
+\acro{DESNZ}{Department for Energy Security and Net Zero}
+\acro{DSIT}{Department for Science, Innovation and Technology}
+\acro{Defra}{Department for Environment, Food and Rural Affairs}
+\acro{KPI}{Key Performance Indicator}
+\acro{SDG}{Sustainable Development Goal}
+\acro{REDD}{Reducing emissions from deforestation and forest degradation in developing countries}
+\acro{WASH}{Water, Sanitation and Hygiene}
+\acro{TA}{Technical Assistance}
+
+\end{acronym}
+
+
+\clearpage
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, dpi=300, fig.pos = "H", out.extra = "")
+options(dplyr.summarise.inform = FALSE, dplyr.show_progress = FALSE) # quiet dplyr
+options(scipen = 999)
+options(knitr.table.format = "latex")
+
+#fonts
+sysfonts::font_add(here::here("font/GDSTransportWebsite-Bold.ttf"), family="gds_bold")
+sysfonts::font_add(here::here("font/GDSTransportWebsite.ttf"), family="gds")
+sysfonts::font_add(here::here("font/Roboto-Medium.ttf"), family="roboto_med")
+sysfonts::font_add(here::here("font/Roboto-Regular.ttf"), family="roboto")
+showtext::showtext_auto()
+
+source(here::here("packages.R"))
+
+lapply(
+  list.files("../R", full.names = TRUE) %>%
+    str_subset("summaries|qa|tests", negate = T), source)
+
+```
+
+```{r data, include=FALSE}
+
+tar_load(summary_main, store = "../_targets/")
+tar_load(summary_results_last, store = "../_targets/")
+tar_load(summary_kpi_progs, store = "../_targets/")
+tar_load(summary_disagg_main, store = "../_targets/")
+tar_load(summary_disagg_prog_count, store = "../_targets/")
+tar_load(summary_top_progs, store = "../_targets/")
+tar_load(summary_kpi15, store = "../_targets/")
+
+tar_load(kpi_totals_table, store = "../_targets/")
+tar_load(disagg_table, store = "../_targets/")
+disagg_table <- disagg_table %>% 
+  mutate(`Number of Programmes` = str_replace_all(`Number of Programmes`, "<5", "$<$5")) %>% 
+mutate(`Total Achieved` = str_replace_all(`Total Achieved`, "<20", "$<$20")) 
+tar_load(prog_list_table, store = "../_targets/")
+tar_load(tpb_table, store = "../_targets/")
+
+tar_load(line_plot, store = "../_targets/")
+tar_load(kpi15_plot_new, store = "../_targets/")
+tar_load(kpi15_plot_old, store = "../_targets/")
+tar_load(ta01_plot, store = "../_targets/")
+
+tar_load(reporting_periods, store = "../_targets/")
+
+
+```
+
+
+# Introduction
+## International Climate Finance 
+
+International Climate Finance (ICF) is Official Development Assistance (ODA) from the UK to support developing countries to reduce poverty and respond to and mitigate the challenges caused by climate change and environmental degradation. These investments help developing countries to:
+
+- adapt and build resilience to the current and future effects of climate change 
+- pursue low-carbon development
+- support sustainable management of natural resources
+- increase access to clean energy
+- reduce deforestation
+
+The UK has committed to spending £11.6 billion of ICF between financial years 2021/2022 to 2025/2026, with £3 billion of this to be invested in climate change solutions that protect, restore and sustainably manage nature. The Prime Minister announced at COP27 that we are tripling our adaptation finance from £500 million in 2019 to £1.5 billion in 2025. The UK met its previous ICF commitment of £5.8 billion between 2016/2017-2020/2021 and £3.8 billion was spent from 2011/2012-2015/2016. The UK International Climate Finance Strategy\footnote{\href{https://www.gov.uk/government/publications/uk-international-climate-finance-strategy}{UK Government (2023) Together for People and Planet: UK International Climate Finance Strategy}} outlines how ICF is being spent and how it is delivering results.
+
+The ICF portfolio is delivered jointly across four UK Government Departments: the Foreign Commonwealth & Development Office (FCDO); the Department for Energy Security and Net Zero (DESNZ formerly the Department for Business, Energy and Industrial Strategy); the Department for Science, Innovation and Technology (DSIT) and the Department for Environment, Food & Rural Affairs (Defra)
+
+This publication presents the headline achievements of ICF since 2011. It brings together results against 15 key performance indicators (KPIs) from UK aid programmes that have climate change adaptation or mitigation as an objective. The ICF portfolio results framework does not attempt to capture the full benefits of ICF programmes, because individual programmes have context-specific aims that are not necessarily covered by the ICF KPIs. Some programmes integrate climate as part of a broader development project, so not all their aims feed into the ICF KPIs, while others have indirect impacts that that are hard to aggregate across the ICF portfolio. Some programmes may also have not reported all relevant KPIs due to capacity constraints, data limitations, or considerations of proportionality or value for money. Overall, we always aim to provide a conservative estimate of ICF Results rather than overclaim our impact. 
+
+\hfill\break
+
+## Climate change   
+
+
+>\textit{Our planet has just endured a season of simmering — the hottest summer on record. Climate breakdown has begun. Scientists have long warned what our fossil fuel addiction will unleash. Our climate is imploding faster than we can cope with extreme weather events hitting every corner of the planet. Surging temperatures demand a surge in action. Leaders must turn up the heat now for climate solutions. We can still avoid the worst of climate chaos — and we don’t have a moment to lose.}
+
+\begin{flushright}
+- António Guterres \footnote{\href{https://www.un.org/sg/en/content/sg/statement/2023-09-06/secretary-generals-message-the-hottest-summer-record}{UN Secretary-General Statement António Guterres}}
+\end{flushright}
+
+\hfill\break
+
+
+The UN has warned that ‘the world is on the brink of a climate catastrophe, and the window to avert it is closing rapidly’\footnote{UN (2022) Sustainable Development Goals Report}. In 2022, the global mean temperature was approximately 1.15°C above the pre-industrial level, making it one of the warmest years on record\footnote{WMO State of the Global Climate 2022}. To limit warming to 1.5°C, as set out in the Paris Agreement, requires a 43% decrease in global greenhouse gas emissions by 2030, and net zero by 2050.  
+
+The sixth assessment from the Intergovernmental Panel on Climate Change (IPCC) sets out how human-induced climate change is already having devastating impacts globally\footnote{IPCC (2022) 6th Assessment Report WGII: Summary for Policymakers}, and yet greenhouse gas emissions have continued to rise. In 2023, the world experienced the hottest summer on record. The wildfires in Europe were devastating with the Greece wildfire being the largest recorded in the EU, and China and America have experienced powerful hurricanes. The impacts of climate change extend across the Sustainable Development Goals (SDGs), with increased extreme weather events already driving mass mortalities in plant and animal species.  
+
+The IPCC report emphasises the interdependence of climate, ecosystems and biodiversity, and human society, and the need for an integrated approach across these areas to solve the challenges we face. The mutually reinforcing crises of rapid climate change and unprecedented biodiversity loss are a key threat to global security and prosperity. Every year the window for action gets smaller, while the risks we face increase and become more complex. Climate change and biodiversity loss are closely linked: we cannot reach net zero or limit global temperature rises to 1.5 degrees without protecting and restoring ecosystems. Therefore, improvements in agriculture, protecting and restoring nature and using land and the ocean sustainably are central to efforts to tackle and adapt to climate change, build resilience against wider shocks and to protect the global economy. By 2030, climate change and environmental degradation could push a further 100 million into poverty \footnote{World Bank (2016) Managing the impacts of climate change on poverty.}. Millions of people are increasingly exposed to food and water insecurity, but it is the poorest and most vulnerable who are hit first, hardest and who are least able to cope\footnote{Dasgupta et. al. (2021) The Economics of Biodiversity}.  
+
+While the IPCC assessment stressed the severity of the situation, it also outlines how it is still possible to achieve the necessary emissions reductions to keep global warming to 1.5°C\footnote{IPCC (2022) 6th Assessment Report WGIII: Summary for Policymakers}. Every 0.1°C of warming avoided will improve our chances of limiting climate catastrophe. Major transitions will be required in the energy sector to reduce our dependence on fossil fuels. Improvements in urban design and transport will be required to reduce energy consumption. More efficient use and recycling of resources in industry will be important to reduce greenhouse gas emissions. Substantial progress was made at the United Nations Climate Change Conference COP26, hosted by the UK in 2021, which included: 
+
+- Securing net zero commitments for over 90% of the world’s economy - up from 30% two years ago, when the UK began preparations for COP26.
+- The Glasgow Climate Pact was agreed, which set out ambitious commitments to increase action on climate change\footnote{UN (2022) COP26 Glasgow Climate Pact}, including phasing down coal and ending inefficient fossil fuel subsidies for the first time.
+- Increased support to developing countries, including at least doubling adaptation finance to $40 billion per year by 2025.
+- Leaders representing over 90% of the world’s forests pledged to halt and reverse forest loss and land degradation by 2030.
+
+
+At the United Nations Climate Change Conference COP 27 hosted in Egypt in 2022 more progress was made, including:
+- Agreement on a Loss and Damage Fund for vulnerable countries devastated by extreme weather events.
+- Continuation of the 1.5C limit and agreement to strengthen these commitments on cutting greenhouse gases each year.
+- World Bank reform to help provide the funding to help vulnerable countries adapt to the impacts of climate change and reduce their greenhouse gas emissions.
+- Re-affirmed commitment to increased support to developing countries, including at least doubling adaptation finance to $40 billion per year by 2025.
+
+The combination of net zero targets, enhanced 2030 emissions reduction commitments, protecting and restoring nature and global collaboration in key sectors can put the world on track to limit global warming. However, increased action is needed to keep us to the lower 1.5°C limit set out in the Paris Agreement\footnote{UN (2015) United Nations Framework Convention on Climate Change: Paris Agreement}.
+
+\hfill\break
+
+# ICF Results 2022/2023
+
+\hfill\break
+
+## Improvements to the publication for 2023
+We continually seek to improve our reported results to enhance the publication’s usefulness and transparency. This year:
+
+- results against four new KPIs, which measure results supported by ICF technical assistance activities (Technical Assistance KPIs) are reported
+- we have continued to expand the availability of disaggregated results
+- methodologies and guidance on reporting against most of the KPIs have been improved, with a new scoring methodology for KPI 15 and expanded scope for KPIs 8, 10 and 17
+- for enhanced transparency, we will be publishing our data processing pipeline (written in the statistical programming language R)
+
+\hfill\break
+
+## Corrections 
+If an error in any of these results is discovered after publication, a proportionate response will be made depending on whether the incorrect value would lead to a materially different conclusion. If it would, FCDO will issue an ‘unscheduled revision’ as soon as possible after the error is discovered. Errors which are smaller in magnitude will be corrected in the next annual update. 
+
+If you have an idea to improve this publication, please get in touch at statistics@fcdo.gov.uk.
+
+\hfill\break
+
+## Monitoring progress on inclusion
+We are pleased to present more disaggregated results in this year's publication, building on last year when we reported disaggregated data for the first time. Requirements to break down beneficiary counts by sex, age, disability and geography have been strengthened in recent years, but not all programmes have monitoring systems that enable this information to be collected.
+
+In particular, it is not always possible for programmes to report an individual's characteristics across multiple categories – for example, disabled women in rural areas. Where a programme has not been able to provide a disaggregation in the format required, the results are listed as 'unspecified' within the publication. This can include those within disaggregation categories we do not yet report on, those where we cannot sufficiently verify the data or the level of data is not yet available. We are continuing to improve our data systems to support better disaggregated data collection and are working towards increased coverage of disaggregated results.
+
+To protect sensitive data where the number of programmes reporting is very low, we suppress disaggregated results with fewer than 5 reporting programmes or fewer than 20 individual beneficiaries.
+
+\hfill\break
+
+## Total Achieved Results 
+
+ICF Results are reported for 11 KPIs and 4 TA KPIs\footnote{The non-continuous numbering of ICF KPIs reflects the discontinuation of indicators found not to be well suited to ICF portfolio monitoring in previous reviews.}. `r summary_main %>% filter(achieved_total>0) %>% distinct(programme_id) %>% nrow() %>% as.english() %>% str_to_sentence()` programmes have reported ICF results since 2011. Many of these programmes will continue to deliver further benefits after they have ended, so as well as cumulative results to date, we also report on total expected programme benefits (see Annex 1).
+
+The total cumulative results achieved for each KPI between April 2011 and March `r year(Sys.Date())` are shown in Table 1. Where this year’s KPI results are compared to those from the previous year, the latest available data has been used, including historic revisions, so these differences may not match previously published data. Throughout the publication, all figures greater than 10,000 have been rounded down to the nearest whole thousand.  
+
+For each KPI, cumulative results are calculated by summing results from all reporting programmes, across all years from 2011. More detailed results for each KPI are outlined below in the section 'Results for each Key Performance Indicator (KPI)'. The percentage increases presented from the previous year are based on the latest available data, after any updates to historical data. Where there have been notable corrections to historic data these are identified within the KPI section below. All charts are also based on the latest cumulative results and include any updates to historical data. 
+
+Previous publications and the methodologies used to guide results monitoring and collection can be found on the [ICF Results webpages](). Details of the programmes referenced throughout this publication can be found on [Development Tracker](https://devtracker.fcdo.gov.uk/)
+
+
+```{r kpi_totals, echo = FALSE}
+
+kpi_totals_table %>% 
+  mutate(`KPI Title` = str_remove_all(`KPI Title` , " as a result of ICF")) %>% 
+  mutate(`KPI Number` = str_replace_all(`KPI Number`, "I 0", "I ")) %>% 
+  kable(
+    caption = "ICF results achieved from April 2011 to March 2023",
+    booktabs=T
+  ) %>% 
+  kable_styling(latex_options = c("hold_position"),
+                position = "center") %>% 
+  column_spec(1, bold = T, width = "1in") %>%
+  column_spec(2,width = "3in") %>%
+  column_spec(3,width = "2in") %>%
+  row_spec(0,bold=TRUE)
+  
+
+```
+
+
+\newpage
+
+# ICF Key Performance Indicator Results
+
+\hfill\break
+
+## KPI 1: Number of people supported to better adapt to the effects of climate change
+
+``` {r kpi1_info, echo=FALSE}
+top_progs_kpi_01 <- summary_top_progs %>% filter(kpi_id=="ICF KPI 01")
+
+revisions_01 <- summary_results_last %>% filter(kpi_id=="ICF KPI 01") %>% pull(revisions)
+increase_01 <- summary_results_last %>% filter(kpi_id=="ICF KPI 01") %>% pull(increase_achieved_total)
+inc_dec_01 <- ifelse(as.numeric(str_remove_all(increase_01,",")) < 0, "a decrease", "an increase") 
+inc_dec_rev_01 <- ifelse(as.numeric(str_remove_all(revisions_01,",")) < 0, "a decrease", "an increase") 
+
+disagg_cat_01 <- summary_disagg_main %>% filter(kpi_id=="ICF KPI 01")
+disagg_01 <- summary_disagg_prog_count %>% filter(kpi_id=="ICF KPI 01")
+
+```
+
+
+This indicator tracks the number of people directly supported by UK ICF to better adapt to the impacts of climate change. Many different types of interventions contribute to climate adaptation support, including improving food security, water management and preparedness against climate-related natural disasters. These interventions support the achievement of Sustainable Development Goal (SDG) target 13.1 on strengthening resilience and adaptive capacity to climate-related hazards, as well as contributing towards SDG 2 on food security and SDG 6 on access to water.
+
+A total of `r kpi_totals_table %>% filter(if_any(1,~.== "KPI 01")) %>% pull(3) %>% str_to_lower()` were directly supported to adapt to climate change from April 2011 to March `r year(Sys.Date())`, reported by `r summary_kpi_progs %>% filter(kpi_id=="ICF KPI 01") %>% pull(n)` programmes. This was `r inc_dec_01` of `r increase_01` (`r summary_results_last %>% filter(kpi_id=="ICF KPI 01") %>% pull(perc_increase_achieved_total)`) from the previous year (Figure 1). These results reflect the people directly reached by UK interventions, rather than indirect benefits to the wider community.
+
+The three programmes that contributed the largest increases in results for this KPI in the last year were '`r pull(top_progs_kpi_01[1,2])`', '`r pull(top_progs_kpi_01[2,2])`' and '`r pull(top_progs_kpi_01[3,2])`'. There were also programmes that revised their historical results due to methodological and data quality improvements, leading to `r inc_dec_rev_01` of `r revisions_01 %>% str_remove("-")` beneficiaries reached in historical results.
+
+Disaggregation of the results by sex has been reported for `r disagg_cat_01 %>% filter(disagg=="disagg_sex"&category=="unspecified") %>% pull(perc_text_with_unspecified)` of programmes. Where results are available by sex, there was a split of `r filter(disagg_cat_01, category=="female") %>% pull(perc_text_without_unspecified)` female beneficiaries compared to `r filter(disagg_cat_01, category=="male") %>% pull(perc_text_without_unspecified)` male. Most beneficiaries were adults where disaggregation was available. Of the `r disagg_cat_01 %>% filter(disagg=="disagg_disability"&category=="unspecified") %>% pull(perc_text_with_unspecified)`  of results disaggregated by disability, `r pull_data(disagg_cat_01, "disabled", "category", "perc_text_without_unspecified")` of beneficiaries were recorded as having a disability. Where geographic disaggregation was reported (`r disagg_cat_01 %>% filter(disagg=="disagg_geography"&category=="unspecified") %>% pull(perc_text_with_unspecified)` of results), `r pull_data(disagg_cat_01, "rural", "category", "perc_text_without_unspecified")` of beneficiaries were in rural locations, compared to `r pull_data(disagg_cat_01, "urban", "category", "perc_text_without_unspecified")` in urban locations.
+
+\hfill\break
+
+```{r kpi1 chart, echo=FALSE, include=TRUE, fig.cap="Cumulative annual results achieved for KPI 1 as a result of UK ICF, from April 2011 to March 2023", fig.align='center', fig.width=5.5, fig.height=4}
+line_plot[[1]]
+```
+
+
+
+```{r, echo=FALSE, fig.align='center'}
+disagg_tab_01 <- disagg_table %>% filter(kpi_id=="ICF KPI 01") %>% select(-kpi_id)
+
+kable(disagg_tab_01[,-1], 
+      caption = "Disaggregated data for KPI 1",
+      booktabs=T,
+      align=c("l","r","r"), 
+      escape = FALSE) %>% 
+  kable_styling(latex_options = c("hold_position"),
+                position = "center") %>% 
+  pack_rows(index = table(disagg_tab_01$disagg), latex_gap_space = "1em") %>%
+  column_spec(1, bold = T, width = "2in") %>%
+  column_spec(2,width = "1.5in") %>%
+  column_spec(3,width = "1.5in") %>%
+  row_spec(0,bold=TRUE)
+
+
+```
+
+\hfill\break
+
+## KPI 2.1: Number of people with improved access to clean energy
+
+``` {r kpi21_info, echo=FALSE}
+top_progs_kpi_021 <- summary_top_progs %>% filter(kpi_id=="ICF KPI 02.1")
+
+increase_021 <- summary_results_last %>% filter(kpi_id=="ICF KPI 02.1") %>% pull(increase_achieved_total)
+inc_dec_021 <- ifelse(as.numeric(str_remove_all(increase_021,",")) < 0, "a decrease", "an increase") 
+
+revisions_021 <- summary_results_last %>% filter(kpi_id=="ICF KPI 02.1") %>% pull(revisions)
+inc_dec_rev_021 <- ifelse(as.numeric(str_remove_all(revisions_021,",")) < 0, "a decrease", "an increase") 
+
+disagg_cat_021 <- summary_disagg_main %>% filter(kpi_id=="ICF KPI 02.1")
+disagg_021 <- summary_disagg_prog_count %>% filter(kpi_id=="ICF KPI 02.1")
+
+```
+
+This indicator directly contributes to SDG 7 (affordable and clean energy) and SDG 3 (health and wellbeing), reducing carbon emissions and improving health, since the use of polluting cooking fuels is a major contributor to indoor air pollution.
+
+The types of interventions that contribute to this KPI include the installation of solar technology, green mini-grids for local power supply in rural areas, clean cook stoves that reduce people’s dependence on firewood and supporting improvements in energy efficiency.
+
+A cumulative total of `r kpi_totals_table %>% filter(if_any(1,~.== "KPI 02.1")) %>% pull(3) %>% str_to_lower()` were supported with improved access to clean energy from 2011 to `r year(Sys.Date())`, which was `r inc_dec_021` of `r increase_021` (`r pull_data(summary_results_last,"ICF KPI 02.1","kpi_id","perc_increase_achieved_total")`) since `r year(Sys.Date())-1` (Figure 2). From the `r summary_kpi_progs %>% filter(kpi_id=="ICF KPI 02.1") %>% pull(n)` programmes reporting against this KPI, the largest increases in achieved results came from the programmes '`r pull(top_progs_kpi_021[1,2])`', '`r pull(top_progs_kpi_021[2,2])`' and '`r pull(top_progs_kpi_021[3,2])`' As well as the additional results achieved in `r tail(reporting_periods,1)`, a small number of programmes revised their historical results, which saw `r inc_dec_rev_021` in the total reported for previous years by `r revisions_021 %>% str_remove("-")` beneficiaries.
+
+The results for KPI 2.1 were disaggregated by age, disability, energy type, geography and sex. For the results where sex data were available (`r disagg_cat_021 %>% filter(disagg=="disagg_sex"&category=="unspecified") %>% pull(perc_text_with_unspecified)` of results), there were `r pull_data(disagg_cat_021, "female", "category", "perc_text_without_unspecified")` female and `r pull_data(disagg_cat_021, "male", "category", "perc_text_without_unspecified")` male beneficiaries. Less than 1% of beneficiaries were disaggregated by age or disability. Geographic disaggregation covered `r disagg_cat_021 %>% filter(disagg=="disagg_geography"&category=="unspecified") %>% pull(perc_text_with_unspecified)` of results, with `r pull_data(disagg_cat_021, filter_col="category", filter_val="rural", pull_col="perc_text_without_unspecified")` of beneficiaries from  urban locations. Of the results where type of clean energy was disaggregated, clean electricity made up `r pull_data(disagg_cat_021, filter_col="category", filter_val="clean electricity", pull_col="perc_text_without_unspecified")` and clean cooking `r pull_data(disagg_cat_021, filter_col="category", filter_val="clean cooking", pull_col="perc_text_without_unspecified")`.
+
+\hfill\break
+
+```{r kpi2.1 chart, echo=FALSE, include=TRUE, fig.cap="Cumulative annual results achieved for KPI 2.1 as a result of UK ICF, from April 2011 to March 2023", fig.align='center', fig.width=5.5, fig.height=4}
+line_plot[[2]]
+```
+
+\hfill\break
+
+```{r, echo=FALSE}
+disagg_tab_021 <- disagg_table %>% filter(kpi_id=="ICF KPI 02.1") %>% select(-kpi_id)
+
+kable(disagg_tab_021[,-1], 
+      caption = "Disaggregated data for KPI 2.1",
+      booktabs=T,
+      align=c("l","r","r"),
+      escape = FALSE) %>% 
+  kable_styling(latex_options = c("hold_position"),
+                position = "center") %>% 
+  pack_rows(index = table(disagg_tab_021$disagg), latex_gap_space = "1em") %>%
+  column_spec(1, bold = T, width = "2in") %>%
+  column_spec(2,width = "1.5in") %>%
+  column_spec(3,width = "1.5in") %>%
+  row_spec(0,bold=TRUE)
+
+```
+
+\hfill\break
+
+## KPI 2.2: Number of social institutions with improved access to clean energy
+
+``` {r kpi22_info, echo=FALSE}
+top_progs_kpi_022 <- summary_top_progs %>% filter(kpi_id=="ICF KPI 02.2")
+
+increase_022 <- summary_results_last %>% filter(kpi_id=="ICF KPI 02.2") %>% pull(increase_achieved_total)
+revisions_022 <- summary_results_last %>% filter(kpi_id=="ICF KPI 02.2") %>% pull(revisions)
+perc_increase_022 <- summary_results_last %>% filter(kpi_id=="ICF KPI 02.2") %>% pull(perc_increase_achieved_total)
+inc_dec_022 <- ifelse(as.numeric(str_remove_all(increase_022,",")) < 0, "a decrease", "an increase") 
+
+revisions_022 <- summary_results_last %>% filter(kpi_id=="ICF KPI 02.2") %>% pull(revisions)
+inc_dec_rev_022 <- ifelse(as.numeric(str_remove_all(revisions_022,",")) < 0, "a decrease", "an increase") 
+
+diff_022 <- summary_results_last %>% filter(kpi_id=="ICF KPI 02.2") %>% pull(increase_achieved_total)
+inc_dec_022 <- ifelse(as.numeric(str_remove_all(diff_022,",")) < 0, "a decrease", "an increase") 
+
+tot_022 <- kpi_totals_table %>% filter(if_any(1,~.== "KPI 02.2")) %>% pull(3)
+```
+
+KPI 2.2 is similar to KPI 2.1 but focuses on social institutions\footnote{For this KPI, social institutions are defined as: schools, universities, hospitals, health centres, government institutions, state owned infrastructure and civil society organisations} that have improved access to clean energy, which thereby provides benefits to the wider community. One of the biggest contributors to this KPI was the ‘Somali Health and Nutrition Programme’.
+
+A total of `r tot_022 %>% str_to_lower()` have been supported with improved energy access between 2011 and `r year(Sys.Date())`, through `r pull_data(summary_kpi_progs,"ICF KPI 02.2", "kpi_id", "n")` programmes (Figure 3). There was `r inc_dec_022` of `r diff_022` (`r perc_increase_022`) institutions supported.
+
+\hfill\break
+ 
+```{r kpi2.2 chart, echo=FALSE, include=TRUE, fig.cap="Cumulative annual results achieved for KPI 2.2 as a result of UK ICF, from April 2011 to March 2023", fig.align='center', fig.width=5.5, fig.height=4}
+line_plot[[3]]
+```
+
+\hfill\break
+
+## KPI 4: Number of people whose resilience has been improved
+``` {r kpi04_info, echo=FALSE}
+top_progs_04 <- summary_top_progs %>% filter(kpi_id=="ICF KPI 04")
+
+perc_increase_04 <- summary_results_last %>% filter(kpi_id=="ICF KPI 04") %>% pull(perc_increase_achieved_total)
+increase_04 <- summary_results_last %>% filter(kpi_id=="ICF KPI 04") %>% pull(increase_achieved_total)
+revisions_04 <- summary_results_last %>% filter(kpi_id=="ICF KPI 04") %>% pull(revisions)
+inc_dec_04 <- ifelse(as.numeric(str_remove_all(revisions_04,",")) < 0, "a decrease", "an increase") 
+
+disagg_cat_04 <- summary_disagg_main %>% filter(kpi_id=="ICF KPI 04")
+disagg_04 <- summary_disagg_prog_count %>% filter(kpi_id=="ICF KPI 04")
+
+tot_04 <- kpi_totals_table %>% filter(if_any(1,~.== "KPI 04")) %>% pull(3)
+
+```
+
+This indicator tracks the number of people for whom UK ICF interventions have improved their resilience to climate shocks and stresses. Programmes reporting on this indicator support the achievement of SDG target 13.1 on strengthening resilience and adaptive capacity to climate-related hazards. ICF programmes are designed to improve climate resilience according to context-specific climate risks.
+
+Climate resilience can be considered as having three dimensions: adaptive capacity, anticipatory capacity, and absorptive capacity. Context-relevant indicators of resilience are defined across at least two dimensions of resilience for reporting against KPI 4. Interventions may include: building houses on plinths; preserving water catchments; strengthening flood defences; establishing early-warning systems and social protection. This indicator may overlap with KPI 1, as it can include helping people to adapt to climate change, but for this indicator there needs to be evidence of improved resilience across more than one dimension, supported by data before and after the programme interventions. This makes it more complicated than KPI 1, which reports how many people have been directly reached by our interventions.
+Improvement on each indicator is demonstrated through repeated beneficiary surveys. These individual indicator results are combined in a predefined way to give a single result of ‘improved’ or ‘not improved’ in relation to each programme participant.
+
+Resilience was improved for a total of `r tot_04 %>% str_to_lower()` across `r summary_kpi_progs %>% filter(if_any(1,~.== "ICF KPI 04")) %>% pull(3)` ICF programmes from April 2011 to March `r year(Sys.Date())` (Figure 4). This was an increase of `r increase_04` (`r perc_increase_04`) from the previous year. The largest increase came from '`r pull(top_progs_04[1,2])`', reporting against this indicator for the first time. Overall, despite increasing, the cumulative results have plateaued this year due to the completion, and closure, of several programmes that have reported large results in the past.
+
+Disaggregation by sex covered `r disagg_cat_04 %>% filter(disagg=="disagg_sex" & category=="unspecified") %>% pull(perc_text_with_unspecified)` of reported results for KPI 4. Where the sex of beneficiaries was known, `r pull_data(disagg_cat_04, "female","category","perc_text_without_unspecified")` were female and `r pull_data(disagg_cat_04, "male","category","perc_text_without_unspecified")` were male. Where disability status was known (`r disagg_cat_04 %>% filter(disagg=="disagg_disability" & category=="unspecified") %>% pull(perc_text_with_unspecified)` of results), `r pull_data(disagg_cat_04, "disabled","category","perc_text_without_unspecified")` of beneficiaries had a disability and `r pull_data(disagg_cat_04, "not disabled","category","perc_text_without_unspecified")` beneficiaries did not have a disability. Around `r disagg_cat_04 %>% filter(disagg=="disagg_geography" & category=="unspecified") %>% pull(perc_text_with_unspecified)` of KPI 4 results included geography disaggregation. Where geography was known, there were `r pull_data(disagg_cat_04, "rural","category","perc_text_without_unspecified")` rural beneficiaries and `r pull_data(disagg_cat_04, "urban","category","perc_text_without_unspecified")` urban beneficiaries.
+
+\hfill\break
+
+```{r kpi4 chart, echo=FALSE, include=TRUE, fig.cap="Cumulative annual results achieved for KPI 4 as a result of UK ICF, from April 2011 to March 2023", fig.align='center', fig.width=5.5, fig.height=4}
+line_plot[[4]]
+```
+
+
+```{r, echo=FALSE, fig.align='center'}
+disagg_tab_04 <- disagg_table %>% filter(kpi_id=="ICF KPI 04") %>% select(-kpi_id)
+
+kable(disagg_tab_04[,-1], 
+      caption = "Disaggregated data for KPI 4",
+      booktabs=T,
+      align=c("l","r","r"),
+      escape = FALSE) %>% 
+  kable_styling(latex_options = c("hold_position"),
+                position = "center") %>% 
+  pack_rows(index = table(disagg_tab_04$disagg), latex_gap_space = "1em") %>%
+  column_spec(1, bold = T, width = "2in") %>%
+  column_spec(2,width = "1.5in") %>%
+  column_spec(3,width = "1.5in") %>%
+  row_spec(0,bold=TRUE)
+
+
+```
+
+\hfill\break
+
+## KPI 6: Tonnes of Greenhouse Gas Emissions Reduced or Avoided
+
+``` {r kpi06_info, echo=FALSE}
+top_progs_kpi_06 <- summary_top_progs %>% filter(kpi_id=="ICF KPI 06")
+
+perc_increase_06 <- summary_results_last %>% filter(kpi_id=="ICF KPI 06") %>% pull(perc_increase_achieved_total)
+increase_06 <- summary_results_last %>% filter(kpi_id=="ICF KPI 06") %>% pull(increase_achieved_total)
+revisions_06 <- summary_results_last %>% filter(kpi_id=="ICF KPI 06") %>% pull(revisions)
+inc_dec_06 <- ifelse(as.numeric(str_remove_all(increase_06,",")) < 0, "a decrease", "an increase") 
+inc_dec_rev_06 <- ifelse(as.numeric(str_remove_all(revisions_06,",")) < 0, "a decrease", "an increase") 
+
+disagg_cat_06 <- summary_disagg_main %>% filter(kpi_id=="ICF KPI 06")
+disagg_06 <- summary_disagg_prog_count %>% filter(kpi_id=="ICF KPI 06")
+
+tot_06 <- kpi_totals_table %>% filter(if_any(1,~.== "KPI 06")) %>% pull(3)
+```
+
+This indicator estimates the reduction in greenhouse gas emissions as a result of UK ICF interventions, compared with expected emissions in the absence of this support. It is a similar indicator to the new TA KPI 5 indicator which measures the volume of greenhouse gas emissions supported by ICF technical assistance activities. However, there are key differences between these two indicators. KPI 6 focuses on capital investment projects where we can directly attribute the emissions reduced or avoided to ICF funding. TA KPI 5 measures the contribution that ICF technical assistance has made to reducing emissions\footnote{Attributed means that our work directly and solely caused the results; contributed means our work was part of a number of factors which led to a result.}.
+
+UK ICF delivers reductions in emissions of greenhouse gases through programmes that cover all sectors of the economy. Activities that deliver against this KPI include those that replace fossil fuels with renewable energy sources (such as solar, wind or geothermal), promote low carbon alternatives to non-sustainably sourced wood for domestic cooking, and reduce deforestation. This indicator is aligned with SDG indicator 13.2.21 which also measures the net change in annual greenhouse gas emissions. 
+
+Benefits can be delivered against KPI 6 even after a programme has closed if emissions continue to be reduced or avoided. For example, solar panels will continue to generate clean energy and reduce greenhouse gas emissions after the end of the programme which funded their installation, for as long as they continue to function. This explains why the expected total lifetime results are much higher than the results achieved so far against this indicator - see Annex 1.  
+
+It is estimated that `r tot_06 %>% str_remove("[ ].*")` tonnes of carbon dioxide equivalent were reduced or avoided as a result of ICF programmes since 2011, `r inc_dec_06` of `r perc_increase_06` compared to the cumulative results up to `r year(Sys.Date())-1` (Figure 5). Four programmes also reported against this KPI for the first time in `r year(Sys.Date())`, taking the total number of ICF reporting programmes to `r summary_kpi_progs %>% filter(if_any(1,~.== "ICF KPI 06")) %>% pull(3)`. As seen last year, large increases were reported in '`r pull(top_progs_kpi_06[2,2])`' and '`r pull(top_progs_kpi_06[3,2])`', however the largest increase was reported by '`r pull(top_progs_kpi_06[1,2])`'. 
+
+Sector breakdowns have been reported by `r disagg_06 %>% filter(disagg=="disagg_sector") %>% pull(perc)` of programmes, which represent `r disagg_cat_06 %>% filter(disagg=="disagg_sector" & category=="unspecified") %>% pull(perc_text_with_unspecified)` of the total greenhouse gas emission reductions. Energy supply contributed the largest emissions reduced or avoided with `r pull_data(disagg_cat_06, "energy supply", "category", "perc_text_without_unspecified")` of results for which disaggregated data were reported. This was followed by forestry (`r pull_data(disagg_cat_06, filter_col="category",filter_val= "forestry", pull_col="perc_text_without_unspecified")`), land/sea-use and land/sea-use change (`r pull_data(disagg_cat_06, filter_col="category",filter_val= "land/sea-use and land/sea-use change", pull_col="perc_text_without_unspecified")`), transport (`r pull_data(disagg_cat_06, filter_col="category",filter_val= "transport", pull_col="perc_text_without_unspecified")`) and industrial processes (`r pull_data(disagg_cat_06, filter_col="category",filter_val= "industrial processes", pull_col="perc_text_without_unspecified")`). The remaining sectors (agriculture, business, residential, waste management and water) all recorded smaller amounts of emissions reduction.  
+
+\hfill\break
+
+```{r kpi6 chart, echo=FALSE, include=TRUE, fig.cap="Cumulative annual results achieved for KPI 6 as a result of UK ICF, from April 2011 to March 2023", fig.align='center', fig.width=5.5, fig.height=4}
+line_plot[[5]]
+```
+
+
+
+```{r, echo=FALSE, fig.align='center'}
+disagg_tab_06 <- disagg_table %>% filter(kpi_id=="ICF KPI 06") %>% select(-kpi_id)
+
+kable(disagg_tab_06[,-1], 
+      caption = "Disaggregated data for KPI 6",
+      booktabs=T,
+      align=c("l","r","r"),
+      escape = FALSE) %>% 
+  kable_styling(latex_options = c("hold_position"),
+                position = "center") %>% 
+  pack_rows(index = table(disagg_tab_06$disagg), latex_gap_space = "1em") %>%
+  column_spec(1, bold = T, width = "2in") %>%
+  column_spec(2,width = "1.5in") %>%
+  column_spec(3,width = "1.5in") %>%
+  row_spec(0,bold=TRUE)
+
+
+```
+
+\hfill\break
+
+## KPI 7: Installed capacity of clean energy
+``` {r kpi07_info, echo=FALSE}
+top_progs_kpi_07 <- summary_top_progs %>% filter(kpi_id=="ICF KPI 07")
+
+perc_increase_07 <- summary_results_last %>% filter(kpi_id=="ICF KPI 07") %>% pull(perc_increase_achieved_total)
+increase_07 <- summary_results_last %>% filter(kpi_id=="ICF KPI 07") %>% pull(increase_achieved_total)
+revisions_07 <- summary_results_last %>% filter(kpi_id=="ICF KPI 07") %>% pull(revisions)
+inc_dec_07 <- ifelse(as.numeric(str_remove_all(increase_07,",")) < 0, "a decrease", "an increase") 
+inc_dec_rev_07 <- ifelse(as.numeric(str_remove_all(revisions_07,",")) < 0, "a decrease", "an increase") 
+
+disagg_cat_07 <- summary_disagg_main %>% filter(kpi_id=="ICF KPI 07")
+disagg_07 <- summary_disagg_prog_count %>% filter(kpi_id=="ICF KPI 07")
+
+tot_07 <- kpi_totals_table %>% filter(if_any(1,~.== "KPI 07")) %>% pull(3)
+```
+
+This indicator measures clean energy capacity installed as a result of UK ICF interventions. It tracks both on- and off-grid clean energy sources, such as wind, solar, or geothermal energy; and clean cookstoves. Installed capacity refers to the rated power output when the clean energy source is operational, which is different to energy generated. 
+
+Access to energy is a primary constraint to inclusive economic growth and job creation. This supports SDG target 7 to expand infrastructure and technology to supply modern, sustainable energy for all in developing countries. In many cases, the generation of energy from clean sources partially displaces fossil fuel energy generation, resulting in reduced greenhouse gas emissions and thereby also contributing to KPI 6 ‘Net change in greenhouse gas emissions’. 
+
+It is estimated that `r tot_07 %>% str_remove("[ ].*")` megawatts (MW) of clean energy capacity were installed by ICF programmes between 2011 and `r year(Sys.Date())`, `r inc_dec_07` of `r perc_increase_07` on the cumulative installed capacity up to `r year(Sys.Date())-1` (Figure 6). A total of `r pull_data(summary_kpi_progs, filter_col="kpi_id", filter_val="ICF KPI 07", pull_col="n")` programmes have reported against this KPI, 6 programmes more than reported in 2022.  
+
+Both the 'Climate Public Private Partnership Programme (CP3)' and 'Global Climate Partnership Fund (GCPF)' saw a decrease in cumulative achieved results due to methodological improvements and increased data availability. However, this decrease has been offset by lager increases seen in the '`r pull(top_progs_kpi_07[1,2])`', '`r pull(top_progs_kpi_07[2,2])`' and '`r pull(top_progs_kpi_07[3,2])`' programmes. 
+
+Installed clean energy capacity results are disaggregated by geography, grid connectivity and technology type. For the `r pull_data(disagg_07, "disagg_geography","disagg", "progs")` programmes that reported against geography (`r disagg_cat_07 %>% filter(disagg=="disagg_geography" & category=="unspecified") %>% pull(perc_text_with_unspecified)` of reported results), most were reported in urban locations compared to rural (`r pull_data(disagg_cat_07, "urban","category", "perc_text_without_unspecified")` to `r pull_data(disagg_cat_07, "rural","category", "perc_text_without_unspecified")`). `r disagg_cat_07 %>% filter(disagg=="disagg_on_off_grid" & category=="unspecified") %>% pull(perc_text_with_unspecified)` of the results were disaggregated by type of grid connectivity, with `r pull_data(disagg_cat_07, "on-grid","category", "perc_text_without_unspecified")` of this feeding into a national or regional grid (on-grid). These projects will typically be utility-scale, in the order of tens or hundreds of megawatts. Disaggregation by technology type covers `r disagg_cat_07 %>% filter(disagg=="disagg_technology_type" & category=="unspecified") %>% pull(perc_text_with_unspecified)` of the reported megawatts of clean energy capacity installed. Solar photovoltaic (PV) recorded the majority of these disaggregated results (`r pull_data(disagg_cat_07, "solar photovoltaic (pv)","category", "perc_text_without_unspecified")`), followed by wind and hydropower with `r pull_data(disagg_cat_07, "wind power","category", "perc_text_without_unspecified")` and `r pull_data(disagg_cat_07, "hydropower","category", "perc_text_without_unspecified")`, respectively. There were smaller results reported for biofuels, biomass, clean cookstoves, concentrated solar power (CSP) and multiple/mixed renewable energy. 
+
+\hfill\break
+
+```{r kpi7 chart, echo=FALSE, include=TRUE, fig.cap="Cumulative annual results achieved for KPI 7 as a result of UK ICF, from April 2011 to March 2023", fig.align='center', fig.width=5.5, fig.height=4}
+line_plot[[6]]
+```
+
+
+```{r, echo=FALSE}
+disagg_tab_07 <- disagg_table %>% filter(kpi_id=="ICF KPI 07") %>% select(-kpi_id)
+
+kable(disagg_tab_07[,-1], 
+      caption = "Disaggregated data for KPI 7",
+      booktabs=T,
+      align=c("l","r","r"),
+      escape = FALSE) %>% 
+  kable_styling(latex_options = c("hold_position"),
+                position = "center") %>% 
+  pack_rows(index = table(disagg_tab_07$disagg), latex_gap_space = "1em") %>%
+  column_spec(1, bold = T, width = "2in") %>%
+  column_spec(2,width = "1.5in") %>%
+  column_spec(3,width = "1.5in") %>%
+  row_spec(0,bold=TRUE)
+
+```
+
+\hfill\break
+
+## KPI 8: Ecosystem Loss Avoided
+``` {r kpi08_info, echo=FALSE}
+top_progs_kpi_08 <- summary_top_progs %>% filter(kpi_id=="ICF KPI 08")
+
+perc_increase_08 <- summary_results_last %>% filter(kpi_id=="ICF KPI 08") %>% pull(perc_increase_achieved_total)
+increase_08 <- summary_results_last %>% filter(kpi_id=="ICF KPI 08") %>% pull(increase_achieved_total)
+revisions_08 <- summary_results_last %>% filter(kpi_id=="ICF KPI 08") %>% pull(revisions)
+inc_dec_rev_08 <- ifelse(as.numeric(str_remove_all(revisions_08,",")) < 0, "a decrease", "an increase") 
+inc_dec_08 <- ifelse(as.numeric(str_remove_all(increase_08,",")) < 0, "a decrease", "an increase") 
+
+disagg_cat_08 <- summary_disagg_main %>% filter(kpi_id=="ICF KPI 08")
+disagg_08 <- summary_disagg_prog_count %>% filter(kpi_id=="ICF KPI 08")
+
+tot_08 <- kpi_totals_table %>% filter(if_any(1,~.== "KPI 08")) %>% pull(3)
+```
+
+This indicator measures the difference in area of ecosystem coverage resulting from an ICF project, relative to the counterfactual of what would have happened in the absence of the intervention. Prevention of ecosystem loss contributes to climate change mitigation by reducing greenhouse gas emissions, as well as helping to preserve biodiversity. Methodology updates in February 2023 have broadened the ecosystems that can be measured to allow non-forest areas to be included such as marine, freshwater and grassland (using IUCN biome typologies). Additionally, this indicator also assesses if the condition of the habitat retained has been maintained in a functioning state and not degraded.
+
+Between April 2011 and March `r year(Sys.Date())`, a total of `r tot_08 %>% str_to_lower()` of land have avoided deforestation, reported by `r pull_data(summary_kpi_progs, "ICF KPI 08", "kpi_id", "n")` programmes (Figure 7). Since `r year(Sys.Date())-1`, there has been a `r perc_increase_08` increase in area (`r increase_08`ha). Improvements to methodologies for the Blue Forests programme and the REDD Early Movers programme resulted in `r inc_dec_rev_08` of historic results by `r revisions_08 %>% str_remove("-")` hectares overall. However, this decrease in previous results has been counteracted by the Forest Carbon Partnership Facility - Carbon Fund reporting results for the first time and additional results delivered this year, particularly by REDD Early Movers programme. 
+
+\hfill\break
+
+```{r kpi8 chart, echo=FALSE, include=TRUE, fig.cap="Cumulative annual results achieved for KPI 8 as a result of UK ICF, from April 2011 to March 2023", fig.align='center', fig.width=5.5, fig.height=4}
+line_plot[[7]]
+```
+
+\hfill\break
+
+## KPI 10: Value of ecosystem services generated or protected
+``` {r kpi10_info, echo=FALSE}
+top_progs_kpi_10 <- summary_top_progs %>% filter(kpi_id=="ICF KPI 10")
+
+perc_increase_10 <- summary_results_last %>% filter(kpi_id=="ICF KPI 10") %>% pull(perc_increase_achieved_total)
+increase_10 <- summary_results_last %>% filter(kpi_id=="ICF KPI 10") %>% pull(increase_achieved_total)
+revisions_10 <- summary_results_last %>% filter(kpi_id=="ICF KPI 10") %>% pull(revisions)
+inc_dec_10 <- ifelse(as.numeric(str_remove_all(revisions_10,",")) < 0, "a decrease", "an increase") 
+
+disagg_cat_10 <- summary_disagg_main %>% filter(kpi_id=="ICF KPI 10")
+disagg_10 <- summary_disagg_prog_count %>% filter(kpi_id=="ICF KPI 10")
+
+tot_10 <- kpi_totals_table %>% filter(if_any(1,~.== "KPI 10")) %>% pull(3)
+
+```
+
+Ecosystem services are the many and varied benefits to humans, provided by the natural environment and healthy ecosystems. Ecosystem services can be divided into four categories: provisioning services (e.g. energy, food, medicine); regulating services (e.g. flood protection, climate regulation, pest control); cultural services (e.g. education, recreation, spiritual) and supporting services (e.g. services that underpin ecosystem functioning such as nutrient and hydrological cycles that support other services). The types of interventions contributing to this indicator include reducing deforestation of mangroves and other forests, promoting sustainable practices within forest habitats and improved resource management. This indicator contributes to the Kunming-Montreal Global Biodiversity Framework target 11 on maintaining or enhancing nature's contribution to people, including ecosystem services. KPI 10 also provides evidence of support across multiple Sustainable Development Goals (SDGs) that rely on ecosystem services, including food (SDG 2), water (SDG 6), health (SDG 3), and biodiversity (SDGs 14 and 15). 
+
+From April 2011 to March `r year(Sys.Date())`, `r paste0("£", tot_10 %>% str_remove("-") %>% str_remove("[ ].*"))` worth of ecosystems services have been generated or protected as a result of ICF interventions (Figure 8). Only 3 programmes have reported results for KPI 10 and no new programmes reported this year. The programmes are 'Reducing deforestation and Forest Fires in the Brazilian Cerrado', 'Blue Forest Initiative' and 'Accountability in Tanzania Programme - Phase II'.
+
+The low level of reporting seen for this indicator is partly because the methodology is based on area reported under KPI 8 - historically restricting this indicator to programmes on reporting ecosystem services provided by forests. As with KPI 8, methodology updates in February 2023 have broadened the ecosystems that can be measured to allow non-forest areas to be included such as marine, freshwater and grassland (using IUCN biome typologies). The addition of more up-to-date data sources within the KPI 10 methodology for ecosystem service valuation should support more accurate valuations of services. Additionally, more detailed disaggregation is now suggested for reporting such as the ecosystem type and the ecosystem services it provides.  These updates were published too close to this year’s results collection to expect an increase in the number of programmes reporting this year but should capture more of the ecosystem services supported by ICF in future publications. 
+
+\hfill\break
+
+```{r kpi10 chart, echo=FALSE, include=TRUE, fig.cap="Cumulative annual results achieved for KPI 10 as a result of UK ICF, from April 2011 to March 2023", fig.align='center', fig.width=5.5, fig.height=4}
+line_plot[[8]]
+```
+
+\hfill\break
+
+## KPI 11: Volume of public finance mobilised for climate change purposes
+```{r kpi11_info, echo=FALSE}
+disagg_cat_11 <- summary_disagg_main %>% filter(kpi_id=="ICF KPI 11")
+disagg_11 <- summary_disagg_prog_count %>% filter(kpi_id=="ICF KPI 11")
+
+perc_increase_11 <- summary_results_last %>% filter(kpi_id=="ICF KPI 11") %>% pull(perc_increase_achieved_total)
+increase_11 <- summary_results_last %>% filter(kpi_id=="ICF KPI 11") %>% pull(increase_achieved_total)
+inc_dec_11 <- ifelse(as.numeric(str_remove_all(increase_11,",")) < 0, "a decrease", "an increase") 
+
+tot_11 <- kpi_totals_table %>% filter(if_any(1,~.== "KPI 11")) %>% pull(3)
+
+top_progs_kpi_11 <- summary_top_progs %>% filter(kpi_id=="ICF KPI 11")
+```
+
+Delivering the UK's global climate change objectives requires substantial amounts of finance from non-UK sources. This indicator estimates the amount of money from non-UK government public sources that has been mobilised for climate change as a result of UK ICF interventions.
+
+Mobilised finance measured under this indicator is from public sources including partner country governments, UN agencies and multilateral or regional development banks. To be counted against this indicator, the mobilised funds must either be additional funds, or existing funds diverted from a more fossil-fuel-intensive use.
+
+A total of `r paste0("£", tot_11 %>% str_remove("[ ].*"))` is estimated to have been mobilised since 2011, `r inc_dec_11` of `r perc_increase_11` compared to `r year(Sys.Date())-1` (Figure 9). Results for this KPI have been reported by `r summary_kpi_progs %>% filter(if_any(1,~.== "ICF KPI 11")) %>% pull(3)` programmes since 2011. The largest increases in achieved results were seen in the programmes '`r pull(top_progs_kpi_11[1,2])`', '`r pull(top_progs_kpi_11[2,2])`' and '`r pull(top_progs_kpi_11[3,2])`'. 
+
+The largest volumes of public finance mobilised were sourced from other donors and from developing countries (those which are ODA eligible), with `r pull_data(disagg_cat_11, filter_col="category", filter_val="donor finance", pull_col="perc_text_without_unspecified")` and `r pull_data(disagg_cat_11, filter_col="category", filter_val="developing country finance", pull_col="perc_text_without_unspecified")` of known finance origins, respectively. Of the programmes that reported public finance disaggregated by mitigation or adaptation theme (`r disagg_11 %>% filter(disagg=="disagg_climate_theme") %>% pull(perc)`), `r pull_data(disagg_cat_11, filter_col="category", filter_val="mitigation", pull_col="perc_text_without_unspecified")`of finance was reported against the mitigation theme.
+
+\hfill\break
+
+```{r kpi11 chart, echo=FALSE, include=TRUE, fig.cap="Cumulative annual results achieved for KPI 11 as a result of UK ICF, from April 2011 to March 2023", fig.align='center', fig.width=5.5, fig.height=4}
+line_plot[[9]]
+```
+
+
+```{r, echo=FALSE}
+disagg_tab_11 <- disagg_table %>% filter(kpi_id=="ICF KPI 11") %>% select(-kpi_id)
+
+kable(disagg_tab_11[,-1], 
+      caption = "Disaggregated data for KPI 11",
+      booktabs=T,
+      align=c("l","r","r"),
+      escape = FALSE) %>% 
+  kable_styling(latex_options = c("hold_position"),
+                position = "center") %>% 
+  pack_rows(index = table(disagg_tab_11$disagg), latex_gap_space = "1em") %>%
+  column_spec(1, bold = T, width = "2in") %>%
+  column_spec(2,width = "1.5in") %>%
+  column_spec(3,width = "1.5in") %>%
+  row_spec(0,bold=TRUE)
+
+```
+
+\hfill\break
+
+>**Information:** KPI 11 and 12 Climate Theme Disaggregation  
+The UK is committed to a balanced split between mitigation and adaptation programmes through its climate finance. Disaggregation by Climate Theme represents the theme where additional finance has been mobilised and is not representative of ICF spending.
+
+\hfill\break
+
+## KPI 12: Volume of private finance mobilised for climate change purposes
+
+```{r kpi12_info, echo=FALSE}
+
+disagg_cat_12 <- summary_disagg_main %>% filter(kpi_id=="ICF KPI 12")
+disagg_12 <- summary_disagg_prog_count %>% filter(kpi_id=="ICF KPI 12")
+
+perc_increase_12 <- summary_results_last %>% filter(kpi_id=="ICF KPI 12") %>% pull(perc_increase_achieved_total)
+increase_12 <- summary_results_last %>% filter(kpi_id=="ICF KPI 12") %>% pull(increase_achieved_total)
+inc_dec_12 <- ifelse(as.numeric(str_remove_all(increase_12,",")) < 0, "a decrease", "an increase") 
+
+tot_12 <- kpi_totals_table %>% filter(if_any(1,~.== "KPI 12")) %>% pull(3)
+
+top_progs_kpi_12 <- summary_top_progs %>% filter(kpi_id=="ICF KPI 12")
+
+```
+
+
+This indicator tracks the amount of private finance mobilised for climate change purposes as a result of UK ICF interventions.
+
+Mobilised finance measured under this indicator is from non-public sources such as banks (excluding multilateral or regional development banks), private companies, pension funds, non-governmental organisations, Clean Development Mechanism (CDM) financing\footnote{The Clean Development Mechanism (CDM) is a way to finance emissions mitigation projects by selling certified emission reductions, or CERs. For further information, see \href{https://cdm.unfccc.int/}{https://cdm.unfccc.int/}}, voluntary carbon credit market, insurance companies, private savings, family money, entrepreneurs’ own capital and sovereign wealth funds. It includes all types of finance such as equity, debt and guarantees. This indicator helps measure the UK’s contribution to the commitment made by developed countries to mobilise $100 billion of public and private finance per year to help developing countries respond to climate change, as set out in SDG target 13.a.
+
+It is estimated that `r paste0("£", tot_12 %>% str_remove("[ ].*"))`  of private finance has been mobilised up to `r year(Sys.Date())`, `r inc_dec_12` of `r perc_increase_12` when compared with the cumulative results up to `r year(Sys.Date())-1` (Figure 10). Eleven additional programmes reported against this KPI for the first time this year bringing the total to `r summary_kpi_progs %>% filter(if_any(1,~.== "ICF KPI 12")) %>% pull(3)` reporting programmes. Large increases against this KPI were seen in '`r pull(top_progs_kpi_12[1,2])`', '`r pull(top_progs_kpi_12[2,2])`' and '`r pull(top_progs_kpi_12[3,2])`'.
+
+Of the results that reported the disaggregation for origins of private finance mobilised (`r disagg_cat_12 %>% filter(disagg=="disagg_origin_of_private_finance_mobilised" & category=="unspecified") %>% pull(perc_text_with_unspecified)` of results), `r pull_data(disagg_cat_12, filter_col="category", filter_val="multiple origins", pull_col="perc_text_without_unspecified")` of results were from multiple origins. Simple co-financing arrangements were the most frequently used by the programmes which reported the finance leveraging mechanism (`r pull_data(disagg_cat_12, filter_col="category", filter_val="simple co-financing arrangements", pull_col="perc_text_without_unspecified")`). These arrangements refer to various business partnerships, business surveys, matching programmes and similar, but also result-based approaches to leveraging finance.
+
+\hfill\break
+
+```{r kpi12 chart, echo=FALSE, include=TRUE, fig.cap="Cumulative annual results achieved for KPI 12 as a result of UK ICF, from April 2011 to March 2023", fig.align='center', fig.width=5.5, fig.height=4}
+line_plot[[10]]
+```
+
+
+```{r, echo=FALSE}
+disagg_tab_12 <- disagg_table %>% filter(kpi_id=="ICF KPI 12") %>% select(-kpi_id)
+
+kable(disagg_tab_12[,-1], 
+      caption = "Disaggregated data for KPI 12",
+      booktabs=T,
+      align=c("l","r","r"),
+      escape = FALSE) %>% 
+  kable_styling(latex_options = c("hold_position"),
+                position = "center") %>% 
+  pack_rows(index = table(disagg_tab_12$disagg), latex_gap_space = "1em") %>%
+  column_spec(1, bold = T, width = "2in") %>%
+  column_spec(2,width = "1.5in") %>%
+  column_spec(3,width = "1.5in") %>%
+  row_spec(0,bold=TRUE)
+
+
+```
+
+\hfill\break
+
+## KPI 15: Extent to which ICF intervention is likely to lead to transformational change
+
+For KPI 15, programmes score their likelihood of leading to transformational change on a scale from 1 to 5. For this reason, the results cannot be reported cumulatively. Instead, we present the distribution of scores across all reporting programmes.
+
+During the 2023 update of ICF KPI methodological notes, the scoring was updated to 1-5 (from previously reported 0-4) and  qualitative descriptions for each score were improved to make it easier to distinguish between different scores on the scale. Descriptions cannot be directly mapped between the different scoring approaches, and programmes need to individually assess their evidence against the new scale. Guidance on converting scores to the new scale are provided in Table 4 of the [KPI 15 Methodology Note](https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/1139441/international-climate-finance_KPI_15_Methodology_Note_Extent_to_which_ICF_intervention_is_likely_to_lead_to_transformational_change.pdf). Due to the change in scoring approach this year, data are presented for 2022/2023 only, with the time series of previous scores presented in Annex 2. 
+
+In total, `r summary_kpi15 %>% distinct(programme_id) %>% nrow()` programmes have reported on KPI 15, with `r summary_kpi15 %>% filter(str_detect(period, as.character(year(Sys.Date())))) %>% nrow()` reporting this year using the new scale. 
+\hfill\break
+
+```{r kpi15_plot, echo=FALSE, include=TRUE, fig.width=12,fig.height=10, fig.cap="Annual results achieved for KPI 15 from April 2011 to March 2023. This shows the proportion of programmes achieving each score per year on the y axis, and the total number of programmes reporting this KPI is annotated above the bars for context.", fig.align='center', fig.width=5.5, fig.height=4}
+kpi15_plot_new
+```
+
+
+```{r kpi15_scores, echo=FALSE}
+
+Score <- c(1,2,3,4,5)
+Description <- c("Substantial evidence transformational change is unlikely or will not occur",
+                 "Partial evidence transformational change is unlikely",
+                 "Not enough evidence yet to assess, or the balance of evidence is inconclusive",
+                 "Partial evidence transformational change is likely",
+                 "Substantial evidence transformational change is likely or already occurring")
+
+data.frame(Score, Description) %>% 
+  kable( 
+      caption = "New scores and definitions for KPI15",
+      booktabs=T,
+      align=c("c","l")) %>% 
+  kable_styling(latex_options = c("hold_position"),
+                position = "center") %>% 
+  column_spec(1, bold = T, width = "0.5in") %>%
+  column_spec(2,width = "4in") %>%
+  row_spec(0,bold=TRUE)
+
+```
+
+
+\hfill\break
+
+## KPI 17: Area under sustainable management practices
+
+``` {r kpi17_info, echo=FALSE}
+top_progs_kpi_17 <- summary_top_progs %>% filter(kpi_id=="ICF KPI 17")
+
+revisions_17 <- summary_results_last %>% filter(kpi_id=="ICF KPI 17") %>% pull(revisions)
+inc_17 <- summary_results_last %>% filter(kpi_id=="ICF KPI 17") %>% pull(increase_achieved_total)
+inc_rev_17 <- ifelse(as.numeric(str_remove_all(revisions_17,",")) < 0, "a decrease", "an increase") 
+
+disagg_cat_17 <- summary_disagg_main %>% filter(kpi_id=="ICF KPI 17")
+disagg_17 <- summary_disagg_prog_count %>% filter(kpi_id=="ICF KPI 17")
+
+```
+
+Ecosystem degradation is a major driver of biodiversity loss and carbon emissions, which both exacerbates, and is exacerbated by, climate change. It reduces the benefits that people derive from the natural environment, including contributions to their livelihoods, health and wellbeing. By working to manage ecosystems sustainably, we can mitigate the impacts of climate change, protect ecosystem services and biodiversity, while also making them more resilient to future climate shocks. 
+
+What constitutes sustainable management is context specific and will vary geographically, as well as depending on the dominant ecosystem and its use in the region. Sustainable management may include, but is not limited to, vegetation management, aquaculture, habitat protection or restoration. These interventions support the achievement of SDG target 12.2 on sustainable management and effective use of natural resources, and SDG 14.2 and 15.1 on sustainable use and restoration of land and sea ecosystems. This indicator also contributes towards the Kunming-Montreal Global Biodiversity Framework target 10 for ensuring ecosystem use is managed sustainably.  
+
+A total of `r kpi_totals_table %>% filter(if_any(1,~.== "KPI 17")) %>% pull(3) %>% str_to_lower()` have received sustainable management practices through ICF from April 2011 to March `r year(Sys.Date())`, reported by `r summary_kpi_progs %>% filter(kpi_id=="ICF KPI 17") %>% pull(n)` programmes. This was an increase of `r summary_results_last %>% filter(kpi_id=="ICF KPI 17") %>% pull(increase_achieved_total)` hectares (`r summary_results_last %>% filter(kpi_id=="ICF KPI 17") %>% pull(perc_increase_achieved_total)`) from the previous year (Figure 12) with 5 new programmes reporting against this indicator. The programmes that contributed the largest increases in results for this KPI in the last year were '`r pull(top_progs_kpi_17[1,2])`', the '`r pull(top_progs_kpi_17[2,2])`' and '`r pull(top_progs_kpi_17[3,2])`'. There were also some programmes that revised their historical results as a result of improvements to methodologies and data quality, leading to `r inc_rev_17` of `r revisions_17` hectares in historical results. 
+
+Updates to this indicator’s methodology in February 2023 have broadened the practices that can be included, allowing for non-forest environments such as marine, freshwater and agricultural. Additionally, more disaggregated data has been requested from programmes on management theme (management, restoration, or protection), the sustainable practice implemented, and ecosystem type.   
+
+Disaggregation of the results by sustainable management theme was reported by `r pull_data(disagg_17, filter_col="disagg", filter_val="disagg_sustainable_management_theme", pull_col="perc")` of programmes (`r disagg_cat_17 %>% filter(disagg=="disagg_sustainable_management_theme" & category=="management") %>% pull(perc_text_without_unspecified)` management, `r disagg_cat_17 %>% filter(disagg=="disagg_sustainable_management_theme" & category=="protection") %>% pull(perc_text_without_unspecified)` protection and `r disagg_cat_17 %>% filter(disagg=="disagg_sustainable_management_theme" & category=="restoration") %>% pull(perc_text_without_unspecified)` management restoration, where theme disaggregation was available). 
+
+The ecosystem type being managed has been reported for `r disagg_cat_17 %>% filter(disagg=="disagg_ecosystem_type" & category=="unspecified") %>% pull(perc_text_with_unspecified)` of results. Where disaggregated results are available, the ecosystem types being managed are intensive land-use (`r disagg_cat_17 %>% filter(disagg=="disagg_ecosystem_type" & category=="intensive land-use") %>% pull(perc_text_without_unspecified)`), anthropogenic marine (`r disagg_cat_17 %>% filter(disagg=="disagg_ecosystem_type" & category=="anthropogenic marine") %>% pull(perc_text_without_unspecified)`) and tropical-subtropical forests (`r disagg_cat_17 %>% filter(disagg=="disagg_ecosystem_type" & category=="tropical-subtropical forests") %>% pull(perc_text_without_unspecified)`).  
+
+Around a third of programmes reported results disaggregated by management practice (`r disagg_cat_17 %>% filter(disagg=="disagg_sustainable_management_practice" & category=="unspecified") %>% pull(perc_text_with_unspecified)` of results), with the most common practices being vegetation management (`r disagg_cat_17 %>% filter(disagg=="disagg_sustainable_management_practice" & category=="vegetation management") %>% arrange(desc(achieved_total)) %>% pull(perc_text_without_unspecified)`), aquaculture (`r disagg_cat_17 %>% filter(disagg=="disagg_sustainable_management_practice" & category=="aquaculture") %>% arrange(desc(achieved_total)) %>% pull(perc_text_without_unspecified)`) and forest management (`r disagg_cat_17 %>% filter(disagg=="disagg_sustainable_management_practice" & category=="forest management") %>% arrange(desc(achieved_total)) %>% pull(perc_text_without_unspecified)`).
+
+Disaggregation by the country the sustainable practice is taking place, was reported for `r disagg_cat_17 %>% filter(disagg=="disagg_sustainable_management_theme" & category=="unspecified") %>% pull(perc_text_with_unspecified)` of results and showed `r disagg_cat_17 %>% filter(disagg=="disagg_country" & category!="unspecified") %>% distinct(category) %>% nrow()` countries having benefited from sustainable management practices as a result of UK ICF support.   
+
+\hfill\break
+
+```{r kpi17 chart, echo=FALSE, include=TRUE, fig.cap="Cumulative annual results achieved for KPI 17 as a result of UK ICF, from April 2011 to March 2023", fig.align='center', fig.width=5.5, fig.height=4}
+line_plot[[11]]
+```
+
+
+```{r, echo=FALSE}
+disagg_tab_17 <- disagg_table %>% filter(kpi_id=="ICF KPI 17") %>% select(-kpi_id)
+
+kable(disagg_tab_17[,-1], 
+      caption = "Disaggregated data for KPI 17",
+      booktabs=T,
+      align=c("l","r","r"),
+      escape = FALSE) %>% 
+  kable_styling(latex_options = c("hold_position"),
+                position = "center") %>% 
+  pack_rows(index = table(disagg_tab_17$disagg), latex_gap_space = "1em") %>%
+  column_spec(1, bold = T, width = "2in") %>%
+  column_spec(2,width = "1.5in") %>%
+  column_spec(3,width = "1.5in") %>%
+  row_spec(0,bold=TRUE)
+
+```
+
+\hfill\break
+
+## ICF Technical Assistance Key Performance Indicator Results
+
+Technical Assistance Key Performance Indicators (TA KPIs) are being published for the first time this year, following an internal pilot of the methodologies. These cover technical assistance (TA) activities which are a form of non-financial development assistance provided by specialists, and can include: 
+
+- Capacity building e.g. supporting individuals in gaining knowledge or capacity through training, workshops, conferences
+- Policy support and evidence e.g. sharing information and advice through knowledge products, support for project planning or policy development, or providing data or climate information
+- Project and investment support e.g. providing assistance to develop projects more effectively, expert guidance, supporting collaboration between public and private actors
+
+Most monitoring and reporting approaches currently, implicitly or explicitly, assume capital spending, and so are not well suited for tracking the activities and performance of programmes solely delivering TA. Additionally, ICF TA is often provided alongside other support such as capital investment from UK Government or another development partner, TA support from other organisations, and national government financial and technical contributions. This makes it more challenging or even impossible to isolate results that are specifically attributable to ICF TA support. We have, therefore, developed a series of TA indicators to support the measurement of ICF TA’s contributions to results[^15].
+
+\hfill\break
+
+## TA KPI 1: Number of countries supported by ICF technical assistance 
+``` {r takpi01_info, echo=FALSE}
+top_progs_kpi_ta01 <- summary_top_progs %>% filter(kpi_id=="ICF TA KPI 01")
+disagg_cat_ta01 <- summary_disagg_main %>% filter(kpi_id=="ICF TA KPI 01")
+disagg_ta01 <- summary_disagg_prog_count %>% filter(kpi_id=="ICF TA KPI 01")
+```
+
+The ICF TA KPI 1 indicator seeks to provide a high-level assessment of the breadth of coverage of ICF TA support for climate action by measuring the number of countries that have received TA support from ICF. ICF supports ODA eligible countries, and this [list](https://www.oecd.org/dac/financing-sustainable-development/development-finance-standards/daclist.htm) is revised every three years. Results are reported cumulatively; therefore, the list of countries represent those which have received a form of technical assistance support since 2011 but not necessarily in the latest year. Some countries are no longer eligible for ICF TA support but appear in the list because they were eligible in previous years.
+
+A total of `r summary_kpi_progs %>% filter(if_any(1,~.== "ICF TA KPI 01")) %>% pull(3)` programmes delivered TA across `r disagg_cat_ta01 %>% filter(disagg=="disagg_country" & category!="unspecified") %>% nrow()` countries. 
+
+\hfill\break
+
+```{r ta01_plot, echo=FALSE, fig.cap="Countries support with technical assistance reported by ICF TA KPI 1. Darker shades are countries that have been supported.", fig.align='center'}
+ta01_plot
+```
+
+
+```{r echo=FALSE, warning=FALSE}
+countries <- summary_disagg_main %>% 
+                filter(kpi_id=="ICF TA KPI 01" & disagg=="disagg_country" & category!="unspecified") %>% 
+                select(category) %>% 
+                mutate(category= str_to_title(category)) %>% 
+                pull(category)
+
+chunks <- split(countries, cut(seq_along(countries), 4,labels = FALSE))
+              
+cbind.fill(chunks[[1]],chunks[[2]],chunks[[3]],chunks[[4]])  %>% as_tibble() %>% mutate_all(replace_na,"-") %>%  
+  kable(col.names = NULL,
+        caption = "Countries supported by ICF Technical Assistance",
+        booktabs=T,
+        align=c("l","l","l","l")) %>% 
+  kable_styling(latex_options = c("hold_position"),
+                position = "center") %>% 
+  column_spec(1,width = "1.5in") %>%
+  column_spec(2,width = "1.5in") %>%
+  column_spec(3,width = "1.5in") %>%
+  column_spec(4,width = "1.5in")
+
+
+```
+
+\hfill\break
+
+## TA KPI 2.1: Number of individuals supported by ICF Technical Assistance
+``` {r takpi021_info, echo=FALSE}
+top_progs_kpi_ta021 <- summary_top_progs %>% filter(kpi_id=="ICF TA KPI 02.1")
+disagg_cat_ta021 <- summary_disagg_main %>% filter(kpi_id=="ICF TA KPI 02.1")
+disagg_ta021 <- summary_disagg_prog_count %>% filter(kpi_id=="ICF TA KPI 02.1")
+```
+This indicator estimates the number of individuals that have been supported by technical assistance from ICF. 
+
+Up to March `r year(Sys.Date())`, `r kpi_totals_table %>% filter(if_any(1,~.== "TA KPI 02.1")) %>% pull(3) %>% str_remove("[ ].*")` individuals were supported through `r pull_data(summary_kpi_progs,"ICF TA KPI 02.1","kpi_id", "n")` ICF programmes delivering technical assistance. '`r pull(top_progs_kpi_ta021[1,2])`' delivered the largest contribution to these results.
+
+This TA KPI is disaggregated by sector and type of technical assistance. Of results that were disaggregated by type of technical assistance (`r disagg_cat_ta021 %>% filter(disagg=="disagg_type_of_technical_assistance" & category=="unspecified") %>% pull(perc_text_with_unspecified)`), project and investment support (`r pull_data(disagg_cat_ta021, "project and investment support","category","perc_text_without_unspecified")`) and capacity building (`r pull_data(disagg_cat_ta021, "capacity building","category","perc_text_without_unspecified")`) were the main focus with a few results reported in policy support and evidence. Sector disaggregation was provided for `r disagg_cat_ta021 %>% filter(disagg=="disagg_sector" & category=="unspecified") %>% pull(perc_text_with_unspecified)` of results where the sectors with the largest results were `r disagg_cat_ta021 %>% filter(disagg=="disagg_sector" & category != "unspecified") %>% slice_max(perc_without_unspecified, n=2) %>% pull(category) %>% str_flatten_comma(last=" and ")` (`r disagg_cat_ta021 %>% filter(disagg=="disagg_sector" & category != "unspecified") %>% slice_max(perc_without_unspecified, n=2) %>% pull(perc_text_without_unspecified) %>% str_flatten_comma(last=" and ")`).
+
+
+```{r, echo=FALSE}
+disagg_tab_ta021<- disagg_table %>% filter(kpi_id=="ICF TA KPI 02.1") %>% select(-kpi_id)
+
+kable(disagg_tab_ta021[,-1], 
+      caption = "Disaggregated data for TA KPI 2.1",
+      booktabs=T,
+      align=c("l","r","r"),
+      escape = FALSE) %>% 
+  kable_styling(latex_options = c("hold_position"),
+                position = "center") %>% 
+  pack_rows(index = table(disagg_tab_ta021$disagg), latex_gap_space = "1em") %>%
+  column_spec(1, bold = T, width = "2in") %>%
+  column_spec(2,width = "1.5in") %>%
+  column_spec(3,width = "1.5in") %>%
+  row_spec(0,bold=TRUE)
+
+```
+
+\hfill\break
+
+## TA KPI 2.2: Number of organisations supported by ICF Technical Assistance
+``` {r takpi022_info, echo=FALSE}
+top_progs_kpi_ta022 <- summary_top_progs %>% filter(kpi_id=="ICF TA KPI 02.2")
+disagg_cat_ta022 <- summary_disagg_main %>% filter(kpi_id=="ICF TA KPI 02.2")
+disagg_ta022 <- summary_disagg_prog_count %>% filter(kpi_id=="ICF TA KPI 02.2")
+```
+
+This indicator estimates the number of organisations supported by technical assistance from ICF. 
+
+Up to March `r year(Sys.Date())`, a total of `r kpi_totals_table %>% filter(if_any(1,~.== "TA KPI 02.2")) %>% pull(3) %>% str_remove("[ ].*")` organisations were supported through `r pull_data(summary_kpi_progs,"ICF TA KPI 02.2","kpi_id", "n")` different programmes. The '`r pull(top_progs_kpi_ta022[1,2])`' contributed the most to this result. 
+
+This TA KPI is disaggregated by sector and type of technical assistance. Sector disaggregation was available for `r disagg_cat_ta022 %>% filter(disagg=="disagg_sector" & category=="unspecified") %>% pull(perc_text_with_unspecified)` of results. The sectors supported were diverse and varied with `r pull_data(disagg_cat_ta022, "public","category","perc_text_without_unspecified")` of organisations supported in the public sector, `r pull_data(disagg_cat_ta022, "agriculture","category","perc_text_without_unspecified")` agriculture, `r pull_data(disagg_cat_ta022, "transport","category","perc_text_without_unspecified")` in transport, `r pull_data(disagg_cat_ta022, "business","category","perc_text_without_unspecified")` in business and `r pull_data(disagg_cat_ta022, "energy supply","category","perc_text_without_unspecified")` in energy supply. Other sectors supported included forestry, industrial processes, waste water management, and water. `r disagg_cat_ta022 %>% filter(disagg=="disagg_type_of_technical_assistance" & category=="unspecified") %>% pull(perc_text_with_unspecified)` of results were disaggregated by type of technical assistance, with `r pull_data(disagg_cat_ta022, "capacity building","category","perc_text_without_unspecified")` of these results towards capacity building, `r pull_data(disagg_cat_ta022, "project and investment support","category","perc_text_without_unspecified")` project and investment support, and `r pull_data(disagg_cat_ta022, "policy support and evidence","category","perc_text_without_unspecified")` policy support and evidence.
+
+
+```{r, echo=FALSE}
+disagg_tab_ta022<- disagg_table %>% filter(kpi_id=="ICF TA KPI 02.2") %>% select(-kpi_id)
+
+kable(disagg_tab_ta022[,-1], 
+      caption = "Disaggregated data for TA KPI 2.2",
+      booktabs=T,
+      align=c("l","r","r"),
+      escape = FALSE) %>% 
+  kable_styling(latex_options = c("hold_position"),
+                position = "center") %>% 
+  pack_rows(index = table(disagg_tab_ta022$disagg), latex_gap_space = "1em") %>%
+  column_spec(1, bold = T, width = "2in") %>%
+  column_spec(2,width = "1.5in") %>%
+  column_spec(3,width = "1.5in") %>%
+  row_spec(0,bold=TRUE)
+
+```
+
+\hfill\break
+
+## TA KPI 3: Number of climate policies informed by ICF Technical Assistance
+``` {r takpi03_info, echo=FALSE}
+top_progs_kpi_ta03 <- summary_top_progs %>% filter(kpi_id=="ICF TA KPI 03")
+disagg_cat_ta03 <- summary_disagg_main %>% filter(kpi_id=="ICF TA KPI 03")
+disagg_ta03 <- summary_disagg_prog_count %>% filter(kpi_id=="ICF TA KPI 03")
+```
+This TA KPI indicator counts the number of public sector climate policies informed by ICF technical assistance programming. This indicator accounts for all forms of TA delivered, ranging from training workshops to knowledge products to feasibility studies. 
+
+Up to March `r year(Sys.Date())`, a total of `r kpi_totals_table %>% filter(if_any(1,~.== "TA KPI 03")) %>% pull(3) %>% str_remove("[ ].*")` climate policies were informed by ICF TA. The '`r pull(top_progs_kpi_ta03[1,2])`' programme had the largest contribution to these results (see the MAF Case Study for further detail). 
+
+TA KPI 3 can be disaggregated by Sector and Type of Technical Assistance. `r disagg_cat_ta03 %>% filter(disagg=="disagg_sector" & category=="unspecified") %>% pull(perc_text_with_unspecified)` of the results were disaggregated by sector, with `r pull_data(disagg_cat_ta03, "energy supply","category","perc_text_without_unspecified")` categorised as energy supply, `r pull_data(disagg_cat_ta03, "transport","category","perc_text_without_unspecified")` as transport, and less than 10% for each of agriculture, land/sea-use and land/sea-use change, waste management and public. `r disagg_cat_ta03 %>% filter(disagg=="disagg_type_of_technical_assistance" & category=="unspecified") %>% pull(perc_text_with_unspecified)` of the results were disaggregated by type of technical assistance, with `r pull_data(disagg_cat_ta03, "project and investment support","category","perc_text_without_unspecified")` of results focussed toward project and investment support, and `r pull_data(disagg_cat_ta03, "policy support and evidence","category","perc_text_without_unspecified")` policy support and evidence. 
+
+
+```{r, echo=FALSE}
+disagg_tab_ta03<- disagg_table %>% filter(kpi_id=="ICF TA KPI 03") %>% select(-kpi_id)
+
+kable(disagg_tab_ta03[,-1], 
+      caption = "Disaggregated data for TA KPI 03",
+      booktabs=T,
+      align=c("l","r","r"),
+      escape = FALSE) %>% 
+  kable_styling(latex_options = c("hold_position"),
+                position = "center") %>% 
+  pack_rows(index = table(disagg_tab_ta03$disagg), latex_gap_space = "1em") %>%
+  column_spec(1, bold = T, width = "2in") %>%
+  column_spec(2,width = "1.5in") %>%
+  column_spec(3,width = "1.5in") %>%
+  row_spec(0,bold=TRUE)
+
+
+```
+
+\hfill\break
+
+## TA KPI 5: Volume of emissions reductions avoided/supported by International Climate Finance technical assistance
+``` {r takpi05_info, echo=FALSE}
+top_progs_kpi_ta05 <- summary_top_progs %>% filter(kpi_id=="ICF TA KPI 05")
+disagg_cat_ta05 <- summary_disagg_main %>% filter(kpi_id=="ICF TA KPI 05")
+disagg_ta05 <- summary_disagg_prog_count %>% filter(kpi_id=="ICF TA KPI 05")
+```
+
+ICF TA KPI 5 aims to provide a measure of the results of UK ICF technical assistance programming in supporting reductions in GHG emissions or avoided GHG emissions among countries, investments, or projects. As it is challenging to attribute particular outcomes to TA support specifically, this indicator does not attempt to determine a specific volume of emissions reductions that ICF TA has causally influenced or that can be directly attributed to ICF investments. Instead, it measures the **contribution** of ICF TA to emissions abatement: the total volume of emissions reduced or avoided that have been _supported_ by ICF TA. Therefore, this is a broader measure than KPI 6, which measures the volume of emissions reductions that can be directly attributable to ICF (which is not possible to identify in many cases of TA provision). Technical assistance and capital investment programmes may report on both these indicators, so some emissions may be reported under one indicator and others may be reported under both.
+
+Up to March `r year(Sys.Date())`, ICF TA from `r pull_data(summary_kpi_progs,"ICF TA KPI 05","kpi_id", "n")` programmes supported the reduction/avoidance of a total of `r kpi_totals_table %>% filter(if_any(1,~.== "TA KPI 05")) %>% pull(3) %>% str_remove("[ ].*")` tonnes of CO2 (tCO2e) emissions. The '`r pull(top_progs_kpi_ta05[1,2])`' programme had the largest contribution to these results. 
+
+TA KPI 5 can be disaggregated by sector and type of technical Assistance. `r disagg_cat_ta05 %>% filter(disagg=="disagg_sector" & category=="unspecified") %>% pull(perc_text_with_unspecified)` of results were disaggregated by sector, with `r pull_data(disagg_cat_ta05, "waste management","category","perc_text_without_unspecified")` categorised as waste management and `r pull_data(disagg_cat_ta05, "energy supply","category","perc_text_without_unspecified")` as energy supply. `r disagg_cat_ta05 %>% filter(disagg=="disagg_type_of_technical_assistance" & category=="unspecified") %>% pull(perc_text_with_unspecified)` of results were disaggregated by type of technical assistance, with the vast majority (`r pull_data(disagg_cat_ta05, "capacity building","category","perc_text_without_unspecified")`) of results focused on capacity building. 
+
+
+```{r, echo=FALSE}
+disagg_tab_ta05<- disagg_table %>% filter(kpi_id=="ICF TA KPI 05") %>% select(-kpi_id)
+
+kable(disagg_tab_ta05[,-1], 
+      caption = "Disaggregated data for TA KPI 05",
+      booktabs=T,
+      align=c("l","r","r"),
+      escape = FALSE) %>% 
+  kable_styling(latex_options = c("hold_position"),
+                position = "center") %>% 
+  pack_rows(index = table(disagg_tab_ta05$disagg), latex_gap_space = "1em") %>%
+  column_spec(1, bold = T, width = "2in") %>%
+  column_spec(2,width = "1.5in") %>%
+  column_spec(3,width = "1.5in") %>%
+  row_spec(0,bold=TRUE)
+
+```
+
+
+\clearpage
+
+
+# Appendix
+
+
+## Annex 1: ICF expected total programme benefits
+
+Expected total programme benefits include all past and future benefits from current or previous ICF programmes. Benefits include those expected to be delivered after a programme has closed. This is common in climate change mitigation programmes, where, for example, a clean energy technology has been installed that will continue to deliver emissions reductions during the technology’s lifetime. Adjustments are made to reflect risks such as the technology breaking down.
+
+Both KPI 15 and TA KPI 1 do not report expected total programme benefits. For KPI 15, this is because scores are provided at a programme level meaning results cannot be aggregated. For TA KPI 1, some programmes will determine the specific countries they will deliver to later in the programme's lifetime. Since we only count each country once, we do not report expected results due to the risk of double counting.
+
+## How to use expected results
+Expected results can be used to estimate the longer-term achievements of UK ICF by taking account of projected future benefits. At the planning stage of a programme, expected results are modelled based on assumptions about the context and the effectiveness of interventions. These estimates are revised during implementation and may go up or down as better data become available. As programme monitoring finishes at programme closure, counting the total programme benefits allows a more comprehensive assessment of the overall achievements of ICF.
+
+```{r total-prog-benefits,echo=FALSE,include=TRUE}
+## TPB for all KPIs
+tpb_table %>% 
+  mutate(`KPI Title` = str_remove_all(`KPI Title` , " as a result of ICF")) %>%
+  mutate(`KPI Number`= str_replace_all(`KPI Number`, "I 0", "I ")) %>% 
+  kable( 
+        caption = "Expected total programme benefits",
+        booktabs=T
+        ) %>% 
+  kable_styling(latex_options = c("hold_position"),
+                position = "center") %>% 
+  column_spec(1, bold = T, width = "1in") %>%
+  column_spec(2,width = "3in") %>%
+  column_spec(3,width = "2.5in") %>%
+  row_spec(0,bold=TRUE)
+
+
+```
+
+
+\hfill\break
+
+
+## Annex 2: ICF KPI 15 historical results
+
+Figure 14 shows results for KPI 15 up to 2021/2022, after which the scoring system was changed (see section KPI 15 for an outline of the new scale). The number of programmes reporting KPI 15 in each year of the time series has changed compared to the number reported last year, due to methodological and data revisions. The number of programmes reported in 2015 has been amended to 26 (from 27) due to an error in last years’ time series. We have also changed the way we treat the four sub funds under the 'Climate Investment Funds' to align with other ICF programmes - previously they were counted as separate programmes, whereas now we count them as a single programme. There have also been changes to the time series for 2021 and 2022, where programmes have reported historical data for KPI 15 in this year’s collection for those previous years. Those new programmes reported scores for 2021 and 2022 using the old scale to maintain the integrity of the time series.
+
+\hfill\break
+
+```{r kpi15_plot_old, echo=FALSE, fig.cap="ICF KPI 15 results up to 2021/2022 using the previous scoring approach.", fig.align='center', fig.width=5.5, fig.height=4}
+kpi15_plot_old
+```
+
+\hfill\break
+
+## Annex 3: List of programmes that have contributed to the ICF results 
+
+This includes all programmes that have reported ICF results, including programmes that have since closed. These programmes range from fully ICF funded to those that only include a small ICF component. Further details of programmes can be found on [DevTracker](https://devtracker.fcdo.gov.uk/) by searching the programme ID.
+ 
+
+```{r proglist, echo=FALSE, include=TRUE}
+
+prog_list_table%>% 
+  kable( 
+        caption = "All programmes that have ever reported ICF results between 2011 and 2023",
+        booktabs=T,
+        longtable=T
+        ) %>% 
+  kable_styling(latex_options = c("hold_position", "repeat_header"),
+                position = "center") %>% 
+  column_spec(1, bold = T, width = "1in") %>%
+  column_spec(2,width = "3.5in") %>%
+  row_spec(0,bold=TRUE)
+
+
+
+
+```
+
+<br>
+
+*[FCDO]: Foreign, Commonwealth and Development Office   
+*[DESNZ]: Department for Energy Security and Net Zero   
+*[Defra]: Department for Environment, Food and Rural Affairs   
+*[DSIT]: Department for Science, Innovation and Technology 
+*[ICF]: International Climate Finance
+*[KPI]: Key Performance Indicator   
+*[SDG]: Sustainable Development Goal   
+*[REDD]: Reducing emissions from deforestation and forest degradation in developing countries    
+*[WASH]: Water, Sanitation and Hygiene    
+*[TA]: Technical Assistance
+  
+
+\newpage
+
+\theendnotes
+
+
+[^1] [UK Government (2023) Together for People and Planet: UK International Climate Finance Strategy](https://www.gov.uk/government/publications/uk-international-climate-finance-strategy)
+[^2] [UN Secretary-General Statement António Guterres](https://www.un.org/sg/en/content/sg/statement/2023-09-06/secretary-generals-message-the-hottest-summer-record)
+[^3] UN (2022) Sustainable Development Goals Report
+[^4] WMO State of the Global Climate 2022
+[^5] IPCC (2022) 6th Assessment Report WGII: Summary for Policymakers
+[^6] World Bank (2016) Managing the impacts of climate change on poverty.
+[^7] Dasgupta et. al. (2021) The Economics of Biodiversity
+[^8] IPCC (2022) 6th Assessment Report WGIII: Summary for Policymakers
+[^9] UN (2022) COP26 Glasgow Climate Pact
+[^10] UN (2015) United Nations Framework Convention on Climate Change: Paris Agreement
+[^11] The non-continuous numbering of ICF KPIs reflects the discontinuation of indicators found not to be well suited to ICF portfolio monitoring in previous reviews.
+[^12] For this KPI, social institutions are defined as: schools, universities, hospitals, health centres, government institutions, state owned infrastructure and civil society organisations
+[^13] Attributed means that our work directly and solely caused the results; contributed means our work was part of a number of factors which led to a result.   
+[^14] The Clean Development Mechanism (CDM) is a way to finance emissions mitigation projects by selling certified emission reductions, or CERs. For further information, see https://cdm.unfccc.int/
+
+
