@@ -1,4 +1,4 @@
-#' tidy up raw data downloaded from REX
+#' prepare tables for oecd reporting of private finance figures
 #' 
 #' @param x  summary main target in pipeline
 #' @param fcdo_only logical whether to only include fcdo figures
