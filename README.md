@@ -70,7 +70,7 @@ Plots are generated from the summarised data and are both directly loaded from t
 
 <li>The table of cumulative results by KPI, which accompanies the publication, is output to CSV.</li>
 
-<li>Plots are saved in SVG (Scalable Vector Graphics) format as this is the preferred format for publishing on [gov.uk](www.gov.uk).</li>
+<li>Plots are saved in SVG (Scalable Vector Graphics) format as this is the preferred format for publishing on gov.uk. </li>
 
 </ol>
 
