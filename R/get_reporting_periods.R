@@ -1,4 +1,4 @@
-#' calculates what years are in scope for current publication
+#' calculates what periods (YYYY/YYYY) are in scope for current publication
 #' 
 
 get_reporting_periods <- function(years){
