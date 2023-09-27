@@ -86,8 +86,8 @@ cbind.fill <- function(...){
       rbind(x, matrix(, n-nrow(x), ncol(x))))) 
   }
 
-  
-  pull_data <- function(x, filter_val, filter_col, pull_col){
+# wrapper for filter/pull chains  
+pull_data <- function(x, filter_val, filter_col, pull_col){
                   x %>% 
                   filter(!!sym(filter_col)==filter_val) %>% 
                   pull(!!sym(pull_col))
