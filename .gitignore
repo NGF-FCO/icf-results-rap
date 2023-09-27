@@ -7,3 +7,5 @@ tables/
 images/
 font/
 to-do.txt
+doc/*.ent
+doc/*.log
