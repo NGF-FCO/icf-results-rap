@@ -1133,6 +1133,7 @@ prog_list_table%>%
 
 \vspace*{\fill}
 
+\small
 #### Image Credits 
 
 \hfill\break
@@ -1144,5 +1145,33 @@ Enabling Development for Girls Education Programme case study: \textit{Promoting
 Blue Forests case study: \textit{Dr Estelle Jones}
 
 Mitigation Action Facility Case Study: \textit{KFW}
+
+
+\hfill\break
+
+\small
+Jointly published by the Foreign, Commonwealth \& Development Office, the Department for Energy Security and Net Zero, the Department for Science, Innovation and Technology and the Department of Environment, Food \& Rural Affairs.
+\hfill\break
+Foreign, Commonwealth & Development Office\newline
+Abercrombie House\newline
+Eaglesham Road\newline
+East Kilbride\newline
+Glasgow\newline
+G75 8EA\newline
+Tel: +44 (0) 20 7008 5000\newline
+Website: [www.gov.uk/government/organisations/foreign-commonwealth-developmentoffice](www.gov.uk/government/organisations/foreign-commonwealth-developmentoffice)\newline
+Facebook: [www.facebook.com/ForeignCommonwealthAndDevelopmentOffice](www.facebook.com/ForeignCommonwealthAndDevelopmentOffice)\newline
+Twitter: @FCDOGovUK\newline
+Email: [fcdo.correspondence@fcdo.gov.uk](mailto:fcdo.correspondence@fcdo.gov.uk)\newline
+
+\hfill\break
+
+© Crown copyright 2023
+Copyright in the typographical arrangement and design rests with the Crown. This
+publication (excluding the logo) may be reproduced free of charge in any format or
+medium, provided that it is reproduced accurately and not used in a misleading context.
+The material must be acknowledged as Crown copyright with the title and source of the
+publication specified.
+
 
 \newpage
