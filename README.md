@@ -20,7 +20,7 @@ Results Publication Date | Results Publication Release | Pipeline DOI
 ## Overview
 The bulk of the pipeline handles and aggregates results data reported by ICF programmes against a set of Key Performance Indicators (KPIs).  HMG analysts and ICF delivery partners input data to the [Results Evidence and eXchange](https://rex.fcdo.gov.uk/) platform, which are then subject to several rounds of Quality Assurance (QA). Once results have passed the QA process, they are ready to be processed in the pipeline. For further information about ICF Results and how they are calculated see the [ICF Results webpage](https://www.gov.uk/guidance/uk-international-climate-finance-results).
 
-The pipeline is built in R using the [{targets}](https://docs.ropensci.org/targets/) package. The `_targets.R` script is the heart of a target pipeline. It defines each of the pipeline targets and sets out the general workflow. Once the repository is downloaded, the R environment to run the pipeline (packages, their versions and dependencies, and some environment variables) can be replicated from the `renv.lock` file using `renv::restore()`. Then, to execute the pipeline simply run `targets::tar_make()`, which will launch a fresh R process and build the targets.  If successful, all targets will be cached in the `_targets/` store and will be overwritten whenever upstream targets, on which there is a dependency, are altered. 
+The pipeline is built in R using the [{targets}](https://docs.ropensci.org/targets/) package. The heart of a targets pipeline is the `_targets.R` script, which defines each of the pipeline targets and sets out the general workflow. Once the repository is downloaded, the R environment to run the pipeline (packages, their versions and dependencies, and some environment variables) can be replicated from the `renv.lock` file using `renv::restore()`. Then, to execute the pipeline simply run `targets::tar_make()`, which will launch a fresh R process and build the targets.  If successful, all targets will be cached in the `_targets/` store and will be overwritten whenever upstream targets, on which there is a dependency, are altered. 
 
 > **NOTE:** this pipeline cannot be run without the relevant datasets outlined in the [Data](#2-Data) section of this document, which have not been shared publicly due to the sensitive nature of programme-level results.
 
@@ -47,14 +47,14 @@ The front matter of the `_targets.R` control file sources the packages and funct
 ### 3. Tidying and filtering
 <ol type ="a">
 
-<li> To transform the data into useful summaries, it must be tidied. Columns names and data values are cleaned and TA KPI 2 is separated into 2.1 and 2.2 to distinguish individuals from organisations. The four sub funds under the CIFs are also merged under one Programme ID.</li>
+<li> To transform the data into useful summaries, it must be tidied. Column names and data values are cleaned and TA KPI 2 is separated into 2.1 and 2.2 to distinguish individuals from organisations. The four sub funds under the CIFs are also merged under one Programme ID.</li>
 
 <li>Results data from the previous year are also tidied in the same way as the latest data.</li>
 
 </ol>
 
 ### 4. Tests
-As an additional QA step, we run several data validation tests to ensure inputters of data into REX have not accidentally inputted results data into future reporting years, duplicate records haven't accidentally been created, check KPI15 scores are valid, and that planned results have been updated for the current reporting year. 
+We run several data validation tests to ensure inputters of data into REX have not accidentally entered results data into future reporting years, duplicate records haven't accidentally been created, we check KPI15 scores are valid, and that planned results have been updated for the current reporting year. 
 
 ### 5. Transform
 The tidied data is transformed into various summary tables. These summaries are used for quality assurance, internal reporting and dashboards, and ultimately feed directly into the ICF results publication.
@@ -75,6 +75,6 @@ Plots are generated from the summarised data and are both directly loaded from t
 </ol>
 
 ### 9. Render
-The ICF Results publication is rendered in Markdown and PDF ready for publication on [gov.uk](www.gov.uk), as well as Word for internal review. Data, plots, and tables are pulled directly into the R markdown from the targets cache, ensuring any changes to the data or pipeline are reflected in the final report. 
+The ICF Results publication is rendered in Markdown and PDF ready for publication on [gov.uk](www.gov.uk), as well as Word and HTML for internal review. Data, plots, and tables are pulled directly into the RMarkdown from the targets cache, ensuring any changes to the data or pipeline are reflected in the final report. 
 
 <br>
