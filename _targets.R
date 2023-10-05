@@ -3,6 +3,7 @@ source("./packages.R")
 
 ## Load your R files
 lapply(list.files("./R", full.names = TRUE), source)
+source("tests/test.R")
 
 options(scipen = 999,
         tidyverse.quiet = TRUE,
@@ -48,7 +49,7 @@ tar_plan(
 
 # 3. Tests ----
 # various tests to check data entry errors
-  tar_target(tests, test_file(here::here("tests", "test.R"))),
+  tar_target(tests, data_checks(rp = reporting_periods, summary_main, rex)),
 
 
 # 4. Transform ----
@@ -146,10 +147,10 @@ tar_plan(
 
 # 8. Render ----
 
-  tar_render(report_word, "doc/icf_report.Rmd", output_dir = "report/", output_format=c("word_document")),
-  tar_render(report_html, "doc/icf_report.Rmd", output_dir = "report/", output_format=c("html_document")),
-  tar_render(report_md, "doc/icf_report.Rmd", output_dir = "report/", output_format=c("md_document")),
-  tar_render(report_pdf, "doc/icf_report_pdf.Rmd", output_dir = "report/", output_format=c("pdf_document")),
+  #tar_render(report_word, "doc/icf_report.Rmd", output_dir = "report/", output_format=c("word_document")),
+  #tar_render(report_html, "doc/icf_report.Rmd", output_dir = "report/", output_format=c("html_document")),
+  #tar_render(report_md, "doc/icf_report.Rmd", output_dir = "report/", output_format=c("md_document")),
+  #tar_render(report_pdf, "doc/icf_report_pdf.Rmd", output_dir = "report/", output_format=c("pdf_document")),
 
 )
 
