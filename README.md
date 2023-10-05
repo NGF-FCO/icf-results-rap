@@ -15,7 +15,7 @@ Each pipeline release is registered with a unique, and persistent, Digital Objec
 
 Results Publication Date | Results Publication Release | Pipeline DOI   
 ----- | ----- | -----    
-28 September 2023 | [2023 UK International Climate Finance Results](https://www.gov.uk/government/publications/uk-international-climate-finance-results-2023) | [![DOI](https://zenodo.org/badge/XXXXXXXX.svg)](https://zenodo.org/badge/latestdoi/XXXXXXXXXX) 
+28 September 2023 | [2023 UK International Climate Finance Results](https://www.gov.uk/government/publications/uk-international-climate-finance-results-2023) | [![DOI](https://zenodo.org/badge/696318417.svg)](https://zenodo.org/badge/latestdoi/696318417)
 
 ## Overview
 The bulk of the pipeline handles and aggregates results data reported by ICF programmes against a set of Key Performance Indicators (KPIs).  HMG analysts and ICF delivery partners input data to the [Results Evidence and eXchange](https://rex.fcdo.gov.uk/) platform, which are then subject to several rounds of Quality Assurance (QA). Once results have passed the QA process, they are ready to be processed in the pipeline. For further information about ICF Results and how they are calculated see the [ICF Results webpage](https://www.gov.uk/guidance/uk-international-climate-finance-results).
