@@ -15,7 +15,7 @@ Each pipeline release is registered with a unique, and persistent, Digital Objec
 
 Results Publication Date | Results Publication Release | Pipeline DOI   
 ----- | ----- | -----    
-28 September 2023 | [2023 UK Climate Finance Results](www.gov.uk/government/publications/uk-climate-finance-result-2023) | [![DOI](https://zenodo.org/badge/XXXXXXXX.svg)](https://zenodo.org/badge/latestdoi/XXXXXXXXXX) 
+28 September 2023 | [2023 UK Climate Finance Results](https://www.gov.uk/government/publications/uk-international-climate-finance-results-2023) | [![DOI](https://zenodo.org/badge/XXXXXXXX.svg)](https://zenodo.org/badge/latestdoi/XXXXXXXXXX) 
 
 ## Overview
 The bulk of the pipeline handles and aggregates results data reported by ICF programmes against a set of Key Performance Indicators (KPIs).  HMG analysts and ICF delivery partners input data to the [Results Evidence and eXchange](https://rex.fcdo.gov.uk/) platform, which are then subject to several rounds of Quality Assurance (QA). Once results have passed the QA process, they are ready to be processed in the pipeline. For further information about ICF Results and how they are calculated see the [ICF Results webpage](https://www.gov.uk/guidance/uk-international-climate-finance-results).
@@ -63,7 +63,7 @@ The tidied data is transformed into various summary tables. These summaries are 
 Indicator data are formatted into tables to be rendered in the publication, and so information on KPIs can be easily coded into the RMarkdown file as inline code chunks e.g. the number of programmes reporting.
 
 ### 7. Plots
-Plots are generated from the summarised data and are both directly loaded from the targets cache into the RMarkdown report and written to disk as SVGs. These plots include a time series for the cumulative achieved results of each KPI, bar charts to display the distribution of KPI 15 scores, and a map for TA KPI 1 to display the countries ICF programmes have supported through technical assistance.
+Plots are generated from the summarised data. These include a time series for the cumulative achieved results of each KPI, bar charts to display the distribution of KPI 15 scores, and a map for TA KPI 1 to display the countries ICF programmes have supported through technical assistance.
 
 ### 8. Write
 <ol type ="a">
