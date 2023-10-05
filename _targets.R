@@ -76,7 +76,7 @@ tar_plan(
   # achieved and tpb by programme and kpi
   tar_target(summary_prog_achieved_total,
                summary_main %>%
-                 group_by(programme_title, programme_id, kpi_id, pick(contains("disagg_*"))) %>%
+                 group_by(programme_title, programme_id, kpi_id, pick(starts_with("disagg_"))) %>%
                  select(achieved_total, adj_tpb) %>%
                  summarise_if(is.numeric, sum, na.rm=T)
              ),
